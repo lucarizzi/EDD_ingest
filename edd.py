@@ -245,9 +245,9 @@ def copy_leda_orig_into_leda(db):
   db.commit()
   cursor.execute("ALTER TABLE kleda ADD COLUMN DEC2000 varchar(20);")
   db.commit()
-  cursor.execute("INSERT INTO kcolumns(dbtable,tabcolumn,units,description) VALUES ('kleda','RA2000','h','Right Ascension (J2000)');")
+  cursor.execute("INSERT INTO kcolumns(dbtable,tabcolumn,units,description,ucd,justification,format) VALUES ('kleda','RA2000','h','Right Ascension (J2000)','','r','%12s');")
   db.commit()
-  cursor.execute("INSERT INTO kcolumns(dbtable,tabcolumn,units,description) VALUES ('kleda','DEC2000','deg','Declination (J2000)');")
+  cursor.execute("INSERT INTO kcolumns(dbtable,tabcolumn,units,description,ucd,justification,format) VALUES ('kleda','DEC2000','deg','Declination (J2000)','','r','%12s');")
   db.commit()
 
   print "adding RA and DEC..."
@@ -351,9 +351,9 @@ def generate_leda_bar_file(db):
   #cur.execute("Select "+columns_to_select+" from kleda_orig;")
   cur.execute("Select * from kleda_orig;")
   leda=cur.fetchall()
-  if (os.path.exists('bar_files/leda_bar')):
-      os.unlink('bar_files/leda_bar')
-  f=open("bar_files/leda_bar","wb")
+  if (os.path.exists(EDD_config.bar_files+'leda_bar')):
+      os.unlink(EDD_config.bar_files+'leda_bar')
+  f=open(EDD_config.bar_files+"leda_bar","wb")
   for line in leda:
       #print line
       line=["" if x is None else str(x) for x in line]

@@ -1,10 +1,11 @@
 import MySQLdb as mdb
 import edd
+import EDD_config
 
 # connect to mysql database
 
 try:
-    db=mdb.connect("localhost",user="distance",passwd="CosmicFlu2",db="EDDsDB")
+    db=mdb.connect(EDD_config.host,user=EDD_config.user,passwd=EDD_config.passwd,db=EDD_config.database)
 except:
     print "There was an error in connecting to the database"
     exit(1)

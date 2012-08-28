@@ -4,15 +4,17 @@ import MySQLdb as mdb
 import sys
 import asciitable
 import edd
+import EDD_config.py
+
 
 # location of the bar files:
-bar_files_dir="/Volumes/DataDisk1Tb/Work/EDD/EDD_Database/bar_files"
+bar_files_dir=EDD_config.bar_files
 
 
 # MAIN
 # connect to mysql database
 try:
-    db=mdb.connect("localhost",user="distance",passwd="CosmicFlu2",db="EDDsDB")
+    db=mdb.connect(EDD_config.host,user=EDD_config.user,passwd=EDD_config.passwd,db=EDD_config.database)
     # accept empty values in integer columns
 except:
     print "There was an error connecting to the database"
@@ -20,7 +22,7 @@ except:
 
     
 cur=db.cursor()    
-cur.execute("DROP DATABASE IF EXISTS EDDsDB;CREATE DATABASE EDDsDB;USE EDDsDB;")
+cur.execute("DROP DATABASE IF EXISTS "+EDD_config.database+";CREATE DATABASE "+EDD_config.database+";USE "+EDD_config.database+";")
 cur.close()
 
 
