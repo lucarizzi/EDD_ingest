@@ -4,7 +4,7 @@ import MySQLdb as mdb
 import sys
 import asciitable
 import edd
-import EDD_config.py
+import EDD_config
 
 
 # location of the bar files:
