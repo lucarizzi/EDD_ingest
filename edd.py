@@ -352,9 +352,9 @@ def generate_leda_bar_file(db):
   #cur.execute("Select "+columns_to_select+" from kleda_orig;")
   cur.execute("Select * from kleda_orig;")
   leda=cur.fetchall()
-  if (os.path.exists(EDD_config.bar_files+'leda_bar')):
-      os.unlink(EDD_config.bar_files+'leda_bar')
-  f=open(EDD_config.bar_files+"leda_bar","wb")
+  if (os.path.exists(EDD_config.bar_files+'/leda_bar')):
+      os.unlink(EDD_config.bar_files+'/leda_bar')
+  f=open(EDD_config.bar_files+"/leda_bar","wb")
   for line in leda:
       #print line
       line=["" if x is None else str(x) for x in line]
