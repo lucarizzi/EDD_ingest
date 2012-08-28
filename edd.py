@@ -2,6 +2,7 @@ import os
 import sys
 import urllib2
 import angles
+import EDD_config
 
 def create_tables(db):
   cur=db.cursor()
