@@ -234,9 +234,9 @@ def copy_leda_orig_into_leda(db):
   cursor.close()
   cursor=db.cursor()
   print "transforming into new format..."
-  ra=["" if x[0] is None else str(angles.AlphaAngle(h=float(str(x[0])))).replace("HH","").replace("MM","").replace("SS","").replace(" ","") for x in results]
-  dec=["" if x[1] is None else str(angles.DeltaAngle(d=float(str(x[1])))).replace("DD","").replace("MM","").replace("SS","").replace(" ","")  for x in results]
-
+  ra = ["" if x[0] is None else str(angles.fmt_angle(float(x[0]),lower=0,upper=24,pre=1)).replace("+","").replace(" ","") for x in results]
+  dec = ["" if x[1] is None else str(angles.fmt_angle(float(x[1]),lower=-90,upper=90,pre=1)).replace(" ","") for x in results]
+  #dec = ["" if x is "" else x[:7] for x in dec]
   print "reading kleda ..."
   cursor.execute("select * from kleda;")
   results=cursor.fetchall()
