@@ -169,7 +169,8 @@ for table in tables:
   # actual reading of the file
   data_from_file = []
   for line in data:
-    line=line.replace("NaN","").replace("\n","").replace(" ","").split("|")
+    line=line.replace("NaN","").replace("\n","").split("|")
+    line=[x.rstrip().lstrip() for x in line]
     line=[x if x else None for x in line]
     if ("kleda" not in table):
         pgc.add(int(line[0]))
