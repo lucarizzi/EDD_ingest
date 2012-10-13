@@ -41,7 +41,7 @@ mydata_tables = []
 mydata_columns=[]
 coordinates_columns_info={}
 special_code=[]
-keywords =  ["category","catalog","abbreviation","dbtable","bibcode","description","filename","md5"]
+keywords =  ["category","catalog","abbreviation","dbtable","bibcode","description","filename"]
 for myline in f:
 
     myline_args=myline.lstrip().rstrip().split("=>")
@@ -82,7 +82,7 @@ for myline in f:
     if myline_args[0]=="end":
          #print "Finished scanning catalog: "+mycatalog["dbtable"]
          try:
-           mydata_tables.append((mycatalog["dbtable"],mycatalog["category"],mycatalog["bibcode"],mycatalog["catalog"],mycatalog["abbreviation"],mycatalog["description"],mycatalog["md5"],mycatalog["filename"]))
+           mydata_tables.append((mycatalog["dbtable"],mycatalog["category"],mycatalog["bibcode"],mycatalog["catalog"],mycatalog["abbreviation"],mycatalog["description"],mycatalog["filename"]))
          except:
            print "Table "+mycatalog["dbtable"]+" seems to be missing some description information"
            exit()
@@ -91,10 +91,11 @@ for myline in f:
             col_def[0]=col_def[0].replace('"','')
             if col_def[1]=="":
                 col_def[1]="varchar(3)"
+            if "int" in col_def[1]:
+               col_def[1]="integer"
             if col_def[0]=="pgc":
                col_def[1]="integer not null"
-            if col_def[1]=="int":
-               col_def[1]="integer"
+
             mysql_statement=mysql_statement+"`"+col_def[0]+"` "+col_def[1].lower()+","
          if coordinates_columns:
               # we have coordinates! adding two more columns
@@ -124,8 +125,8 @@ for myline in f:
 print "Inserting data into ktables..."
 cur=db.cursor()
 cur.executemany(
-    """INSERT INTO ktables (dbtable,category,bibcode,catalog,abbreviation,description,md5sum,file)
-    VALUES (%s,%s,%s,%s,%s,%s,%s,%s)""",mydata_tables)
+    """INSERT INTO ktables (dbtable,category,bibcode,catalog,abbreviation,description,file)
+    VALUES (%s,%s,%s,%s,%s,%s,%s)""",mydata_tables)
 db.commit()
 print "Inserting data into kcolumns..."
 cur.executemany(
