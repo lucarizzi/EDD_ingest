@@ -428,6 +428,9 @@ def determine_format(format):
         format1=format0[1].split(',')
         format1[1]=format1[1].replace(')','')
         return "%"+format1[0]+"."+format1[1]+"f"
+    if format0[0]=="int":
+        format1=format0[1].replace(')','')
+        return "%"+format1+"d"
     print "Format "+format+" cannot be converted... exiting."
     exit
 
