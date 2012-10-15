@@ -237,6 +237,10 @@ except:
   print "Unable to execute special code "+code
   cur.close()
 
+print "All done"
+print "Don't forget to run the sql code to transfer the EDDsDB data into the public database"
+
+
 db.close()
 
 
