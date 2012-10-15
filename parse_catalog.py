@@ -75,6 +75,7 @@ for k in range(0,len(lines)):
             if first_argument.replace('"','') in ['RAh','RAm','RAs','DE-','DEd','DEm','DEs']:
                 print "coordinate=>"+first_argument+"|"+positions[0]+"|"+positions[1]+"|"+type+"|"+unit+"|"+description                
             else:
+                first_argument=first_argument.replace('"','')
                 print "column=>"+first_argument+"|"+type+"|"+unit+"|"+description
 
                 
