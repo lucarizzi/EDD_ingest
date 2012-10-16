@@ -202,10 +202,14 @@ def create_leda_table(db):
 
 
 def copy_leda_orig_into_leda(db):
+  cursor=db.cursor()
   # add the column definition for kleda to kcolumns
+  cursor.execute('delete from kcolumns where dbtable like "%kleda";')
+  db.commit()
+  cursor.execute('delete from ktables where dbtable like "%kleda";')
+  db.commit()
   define_leda_columns(db)
   # retrive the list of columns just added using a query
-  cursor=db.cursor()
   cursor.execute('select tabcolumn from kcolumns where dbtable like "%kleda";')
   results=cursor.fetchall()
   # turn into array
@@ -213,6 +217,8 @@ def copy_leda_orig_into_leda(db):
   # turn into a string separated by comma
   columns=",".join(columns)
   print "Creating a new kleda from kleda_orig using columns: "+columns
+  cursor.execute("drop table if exists kleda;")
+  db.commit()
   cursor.execute("Create table kleda select "+columns+" from kleda_orig;")
   db.commit()
   # add primary key
@@ -305,8 +311,10 @@ def generate_kleda_orig_from_lyon(db,elements):
                  continue
              if myline=="":
                  continue
-             elements=myline.replace("-","").replace(" ","").split("|")
-             elements=[x if x else None for x in elements]
+             #elements=myline.replace("-","").replace(" ","").split("|")
+             elements=myline.replace(" ","").split("|")
+             elements=[x if x!="-" else None for x in elements]
+             #elements=[x if x else None for x in elements]
              if ("pgc" in elements[0]):
                  continue
              if (len(elements)<2):
@@ -330,7 +338,7 @@ def generate_kleda_orig_from_lyon(db,elements):
    cur.executemany("INSERT INTO kleda_orig VALUES ("+format+")",leda) 
    db.commit()
    print "New data has been downloaded from Lyon. You should create an updated leda_bar file."
-   answer=edd.query_yes_no("Would you like to update the leda_bar file now ?",default="yes")
+   answer=query_yes_no("Would you like to update the leda_bar file now ?",default="yes")
    if (answer=="yes"):
      generate_leda_bar_file(db)
 

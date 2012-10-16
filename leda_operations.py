@@ -27,10 +27,11 @@ if (answer=="yes"):
         results=cur.fetchall()
         #print results
         pgcs = [x[0] for x in results]
+        #pgcs=[12439,12446]
         #print pgcs
         cur.close()
         edd.generate_kleda_orig_from_lyon(db,pgcs)
-        edd.copy_leda_orig_int_leda(db)
+        edd.copy_leda_orig_into_leda(db)
         
 answer=edd.query_yes_no("Would you like to generate a new leda bar file from the current kleda in the database?",default="no")
 if (answer=="yes"):
