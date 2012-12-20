@@ -581,6 +581,9 @@ column=>PD|numeric(5,2)||Product (psf_FWHM) x (Vcmb/1000)
 column=>NbarI|numeric(5,2)||Fluctuation star count at I band: Nbar=mbar-mT - difference fluct. and total mags = 2.5log(total lum/lum typical star
 column=>Sigma|numeric(5,3)||
 column=>Qual|varchar(4)||Quality
+column=>icnt|int(4)||Internal group reference number
+column=>NBG_ID|varchar(8)||Nearby Galaxies Catalog (1988) group ID number
+column=>LH_ID|int(4)||Lavaux-Hudson group ID from 2MASS++ catalog
 end
 begin
 category=>Stellar Distances
@@ -643,7 +646,7 @@ abbreviation=>5SNI
 dbtable=>k5sn1a
 bibcode=>2012ApJ...749..174C
 description=>Courtois & Tully 2012 ApJ 749 174. 5 sources of SNIa distances z<0.1 normalized consistent with H0=75.9 km/s/Mpc. Amanullah et al. 2010 ApJ 716 712 (Union2); Jha et al. 2007 ApJ 659 122; Prieto et al. 2006 ApJ 647 501; Hicken et al. 2009 ApJ 700 1097 (Constitution); Folatelli et al. 2010 AJ 139 120 (CSP1)
-filename=>sn1a_5so_318_bar
+filename=>sn1a_5so_308_bar
 column=>pgc|int(7)||PGC number
 column=>SNIa|varchar(6)||Supernova name
 column=>l|numeric(8,4)|deg|Galactic longitude
@@ -1254,7 +1257,7 @@ column=>dlgWR|numeric(10,3)|km/s|Residual in logW at given Rd from the orthogona
 end
 begin
 category=>Photometry
-catalog=>"Spitzer [3.6] Band Photometry",
+catalog=>Spitzer [3.6] Band Photometry,
 abbreviation=>SpitzerPhot
 dbtable=>kspitphot
 bibcode=>
@@ -1285,6 +1288,37 @@ column=>SB20|numeric(5,2)|mag/as^2|Surface brightness at radius a20
 column=>avSB20|numeric(5,2)|mag/as^2|Average surface brightness within radius a20
 column=>C82|numeric(4,1)||Concentration index a80/a20: ratio of radius containing 80% of light to radius containing 20% of light
 column=>RefLink|varchar(25)||Spitzer program
+end
+begin
+category=>Photometry
+catalog=>WISE [3.4] Band Photometry,
+abbreviation=>WISEPhot
+dbtable=>kwisephot
+bibcode=>
+description=>"[3.4] photometry - Cosmic Flows with WISE",
+filename=>wise_bar
+column=>pgc|int(7)||PGC number
+column=>P|int(1)||Public
+column=>Name/Photom|varchar(10)||Common name / select for graphic display
+column=>a26.5|int(4)|arcsec|Radius at 26.5 mag/sq. arcsec isophote
+column=>m_26.5|numeric(5,2)|mag|Magnitude at 26.5 mag/sq. arcsec isophote
+column=>m_tot|numeric(6,3)|mag|Total asymptotic magnitude
+column=>e_m|numeric(5,3)|mag|Uncertainty in total magnitude
+column=>m_ext|numeric(6,3)|mag|Extrapolated asymptotic magnitude
+column=>SB0|numeric(5,2)|mag/as^2|Extrapolated exponential disk central surface brightness
+column=>alpha|numeric(5,1)|arcsec|Exponential disk scale length
+column=>b/a|numeric(4,2)||Ratio of minor to major axis dimensions
+column=>e_b/a|numeric(4,2)||Error in ratio of minor to major axis dimensions
+column=>PA|int(3)|deg|Position angle, East of North
+column=>a80|int(3)|arcsec|Radius on major axis containing 80% of light
+column=>SB80|numeric(5,2)|mag/as^2|Surface brightness at radius a80
+column=>ae|int(3)|arcsec|Radius on major axis containing 50% of light: effective radius
+column=>SBe|numeric(5,2)|mag/as^2|Surface brightness at effective radius ae
+column=>avSBe|numeric(5,2)|mag/as^2|Average surface brightness within effective radius ae
+column=>a20|int(3)|arcsec|Radius on major axis containing 20% of light
+column=>SB20|numeric(5,2)|mag/as^2|Surface brightness at radius a20
+column=>avSB20|numeric(5,2)|mag/as^2|Average surface brightness within radius a20
+column=>C82|numeric(4,1)||Concentration index a80/a20: ratio of radius containing 80% of light to radius containing 20% of light
 end
 begin
 category=>Photometry
@@ -2389,6 +2423,9 @@ column=>XDist_IRAS|numeric(8,4)|mag|Expectation distance modulus from IRAS densi
 column=>e_XDist_IRAS|numeric(6,3)|mag|Error given IRAS density field distance modulus
 column=>u|int(2)||Always set 1
 column=>Virgo|int(2)||Flag for members of Virgo Cluster
+column=>icnt|int(4)||Internal group reference number
+column=>NBG_ID|varchar(8)||Nearby Galaxies Catalog (1988) group ID number
+column=>LH_ID|int(4)||Lavaux-Hudson group ID from 2MASS++ catalog
 end
 begin
 category=>Fundamental Plane
@@ -2453,7 +2490,7 @@ abbreviation=>EFARFP
 dbtable=>kefar
 bibcode=>2001MNRAS.321..277C
 description=>Colless Matthew; Saglia R. P.; Burstein David; Davies Roger L.; McMahon Robert K.; Wegner Gary; The peculiar motions of early-type galaxies in two distant regions - VII. Peculiar velocities and bulk motions; 2001 MNRAS 321 277
-filename=>efar_mn321_277_tables1+2_leda_791_bar
+filename=>efar_mn321_277_tables1+2_leda_788_bar
 column=>pgc|int(7)||PGC number
 column=>GIN|int(4)||EFAR galaxy identification number
 column=>CID|int(3)||EFAR cluster identification
@@ -2506,7 +2543,7 @@ column=>logDw|numeric(5,2)|arcsec|Log of the Dw diameter
 column=>SDw|numeric(6,3)||Selection probability computed using Dw; see ref
 column=>logDwDn|numeric(5,2)|arcsec|Log of Dw computed from Dn; see ref
 column=>SDwDn|numeric(6,3)||Selection probability computed from Dw
-column=>icn|int(4)||Internal group identification number
+column=>icnt|int(4)||Internal group identification number
 column=>FP|int(2)||[0/1] 1=in fundamental plane sample, 1=not in
 column=>PV|int(2)||[0/1] 1=in peculiar velocity sample, 1=not in
 column=>Name|varchar(9)||Cluster name (parenthesis = fore/background)
@@ -2524,6 +2561,7 @@ column=>czD|int(6)|km/s|Redshift corresponding to D
 column=>e_czD|int(6)|km/s|rms uncertainty in czD
 column=>Vpec_cl|int(6)|km/s|Peculiar velocity of the cluster
 column=>e_Vp|int(6)|km/s|rms uncertainty in V
+column=>LH_Gp|int(4)||Lavaux-Hudson group ID (2MASS++ catalog) but only if icnt unavailable
 end
 begin
 category=>Fundamental Plane
