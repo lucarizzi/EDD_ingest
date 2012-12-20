@@ -1,1 +1,3 @@
 EDD_config.py
+*.pyc
+bar_files
