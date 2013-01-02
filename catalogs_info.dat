@@ -261,7 +261,7 @@ abbreviation=>QDis
 dbtable=>kqdist
 bibcode=>
 description=>Distances extracted from the literature based on Cepheid PLR TRGB SBF or other high quality methods.
-filename=>qd_636_bar
+filename=>qd_655_bar
 column=>pgc|int(7)||PGC number
 column=>objname|varchar(8)||Galaxy name
 column=>grpname|varchar(5)||Group name (NBG catalog)
@@ -2599,6 +2599,41 @@ column=>N_logDn_new|int(2)||Number of log Dn measurements - new
 column=>N_logDn_lit|int(2)||Number of log Dn measurements - literature
 column=>logDn|numeric(7,3)||Log Dn
 column=>e_logDn|numeric(6,3)||Error in log Dn
+end
+begin
+category=>Supplementary Catalogs
+catalog=>Local Universe (LU)
+abbreviation=>lucat
+dbtable=>klucat
+bibcode=>
+description=>Local Universe (LU) catalog: input for Numerical Action Models
+filename=>lucat_bar
+column=>pgc|int(7)||PGC number
+column=>Klum|numeric(9,3)|Lsun|Absolute K band luminosity (2MASS) at measured distance
+column=>Dist|numeric(6,2)|Mpc|Distance 
+column=>eD|numeric(5,2)|Mpc|Error in distance
+column=>T|int(2)||Morphological type
+column=>Glon|numeric(8,4)|deg|Galactic longitude
+column=>Glat|numeric(8,4)|deg|Galactic latitude
+column=>SGL|numeric(8,4)|deg|Supergalactic longitude
+column=>SGB|numeric(8,4)|deg|Superalactic latitude
+column=>Vh|int(5)|km/s|Heliocentric velocity
+column=>Vgsre|int(5)|km/s|Radial velocity in Galactic Standard of Rest (Eisenhauer et al. 2005, ApJ, 628, 246)
+column=>Vgsrm|int(5)|km/s|Radial velocity in Galactic Standard of Rest (van der Marel et al. 2012, ApJ, 753, 8)
+column=>Vls|int(5)|km/s|Radial velocity w.r.t. Local Sheet (Tully et al. 2008, ApJ, 676, 184)
+column=>V3k|int(5)|km/s|Radial velocity w.r.t. Cosmic Microwave Background (Kogut et al. 1993, ApJ, 419, 1)
+column=>Icnt|int(4)||Internal group ID number
+column=>HDC|int(4)||High Density group ID from Crook et al. 2007, 655, 790
+column=>Ng|int(4)||Number of galaxies in summation
+column=>Names|varchar(28)||Common names
+column=>NBG_ID|varchar(8)||Group ID in Nearby Galaxies Catalog
+column=>DMtrg|numeric(5,2)|mag|Distance modulus from TRGB measurement 
+column=>eDMt|numeric(4,2)|mag|Error in distance modulus from TRGB measurement 
+column=>DMq|numeric(5,2)|mag|Distance modulus from catalog of`quality distances'
+column=>DMg|numeric(5,2)|mag|Distance modulus of associated group 
+column=>eDMg|numeric(4,2)|mag|Error in distance modulus of associated group 
+column=>So|int(1)||Source of preferred distance: 1=TRGB, 2=group
+column=>Pl|int(2)||Plane? 1,2,3 are around M31, 11,12 are around Cen A
 end
 begin
 category=>Supplementary Catalogs
