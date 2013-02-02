@@ -89,8 +89,8 @@ category=>Redshift Catalogs
 catalog=>2MRS K<11.75
 abbreviation=>2m1175
 dbtable=>k2m1175
-bibcode=>2011arXiv1108.0669H
-description=>J.P.Huchra et al. 2011 arXiv:1108.0669; 2MASS Redshift Survey to Ks=11.75
+bibcode=>2012ApJS..199...26H
+description=>J.P.Huchra et al. 2012,ApJS,199,26; 2MASS Redshift Survey to Ks=11.75
 filename=>2mrs_1175_done_pgc_bar
 column=>pgc|int(7)||PGC number
 column=>ID_2MASXJ|Varchar(20)||2MASS Extended Source Catalog identification
@@ -396,6 +396,109 @@ column=>Vpg_b|int(7)|km/s|Bias corrected group peculiar velocity (Template clust
 column=>e_Vpgb|int(7)|km/s|Error in bias corrected group peculiar velocity
 column=>Dg_b|int(7)|km/s|Bias corrected group distance (Template clusters: includes only `In' galaxies)
 column=>Int_ID|int(4)||Internal group ID number
+end
+begin
+category=>Summary Distances
+catalog=>All CF2 TFR
+abbreviation=>alltfr
+dbtable=>kalltfr
+bibcode=>
+description=>Test build of all TFR components of Cosmicflows-2
+filename=>allTFR_test_bar
+column=>pgc|int(7)||PGC number
+column=>Dist|numeric(5,1)|Mpc|Distance (averaged if more than one source)
+column=>Name|varchar(10)||Common name
+column=>RAJ|varchar(8)|hms|Right Ascension (J2000)
+column=>DeJ|varchar(9)|damas|Declination (J2000)
+column=>Glon|numeric(8,4)|deg|Galactic longitude
+column=>Glat|numeric(8,4)|deg|Galactic latitude
+column=>SGL|numeric(8,4)|deg|Supergalactic longitude
+column=>SGB|numeric(8,4)|deg|Supergalactic latitude
+column=>Ty|int(2)||Morphological type; RC3 numeric code
+column=>Asfd|numeric(4,2)|mag|Reddening at B band from Schlegel et al (1998) dust maps
+column=>Asf|numeric(4,2)|mag|Reddening at B band from Schlafly & Finkbeiner (2011)
+column=>Btot|numeric(5,2)|mag|Total B magnitude from LEDA
+column=>Itot|numeric(5,2)|mag|Total I magnitude, average of CCD contributions 
+column=>Ks|numeric(5,2)|mag|2MASS Ks magnitude, extinction corrected from Huchra et al. 2012 or else Lavaux-Hudson 2011
+column=>b/a|numeric(4,2)||Minor to major axial ratio
+column=>Vhel|int(5)|km/s|Heliocentric velocity
+column=>Vgsr|int(5)|km/s|Velocity in Galactic standard of rest (circular velocity at Sun of 239 km/s; total velocity 251 km/s toward l=90,b=0)
+column=>Vls|int(5)|km/s|Velocity in Local Sheet standard of rest (Tully et al. 2008)
+column=>Vcmb|int(5)|km/s|Velocity in CMB standard of rest (Fixsen et al. 1996)
+column=>Icnt|int(4)||Internal group ID
+column=>2M++|int(4)||Group ID from 2MASS++ catalog of Lavaux & Hudson (2011)
+column=>Fil|numeric(5,1)||Filament ID from private analysis of V8k catalog
+column=>Ibik|numeric(5,2)|mag|I magnitude after corrections used in determination of CF2 luminosity-linewidth distance
+column=>Inc|int(2)|deg|Inclination assumed in determination of CF2 luminosity-linewidth distance
+column=>Wmxi|int(3)|km/s|Linewidth after corrections used in determination of CF2 luminosity-linewidth distance
+column=>logW|numeric(5,3)|[km/s]|Log linewidth after corrections used in determination of CF2 luminosity-linewidth distance
+column=>DMcf2|numeric(5,2)|mag|Distance modulus determined from CF2 luminosity-linewidth analysis
+column=>Dcf2|numeric(5,1)|Mpc|Distance determined from CF2 luminosity-linewidth analysis
+column=>m_c|numeric(5,2)|mag|Apparent magnitude in Springob et al. (2007), corrected for Galactic and internal extinction
+column=>In|int(2)|deg|Inclination of plane of disk to plane of sky, Springob et al. (2007)
+column=>lgWtf|numeric(5,3)|[km/s]|Log of the corrected rotational velocity width; Cornell group corrections, Springob et al (2007)
+column=>DMsfi|numeric(5,2)|mag|Distance modulus determined from SFI++ luminosity-linewidth analysis, Springob et al (2007)
+column=>Dsfi|numeric(5,1)|Mpc|Distance determined from SFI++ luminosity-linewidth analysis, Springob et al (2007)
+column=>DM|numeric(5,2)|mag|Distance modulus: average of CF2 (given double weight) and SFI++
+end
+begin
+category=>Summary Distances
+catalog=>SMAC DM
+abbreviation=>smacdm
+dbtable=>ksmacdm
+bibcode=>
+description=>Test build of SMAC inverse fit moduli with CF2 zero point
+filename=>smac_dm_bar
+column=>pgc|int(7)||PGC number
+column=>Icnt|int(4)||Internal group ID
+column=>Dist|numeric(5,1)|Mpc|Distance, CF2 scale
+column=>DM|numeric(5,2)|mag|Distance modulus, CF2 scale
+column=>RAJ|varchar(11)|hms|Right Ascension (J2000)
+column=>DeJ|varchar(11)|damas|Declination (J2000)
+column=>Asfd|numeric(5,3)|mag|Reddening at R band from Schlegel et al (1998) dust maps
+column=>Gamma|numeric(6,3)||Gamma = Xfp - alfa*(logSigma - 2.2)
+column=>Xfp|numeric(6,3)||Xfp = logRe - 0.33*SBe
+column=>LogRe|numeric(6,3)|[as]|Log effective radius
+column=>SBe|numeric(5,2)|mag|as^2|Surface brightness within effective radius corrected for redshift attenuation
+column=>LSigma|numeric(5,3)|[lm/s]|Log central velocity dispersion
+column=>eSig|numeric(5,3)|[lm/s]|Error in log central velocity dispersion
+column=>Vhel|int(5)|km/s|Heliocentric velocity of galaxy
+column=>ClVhel|int(5)|km/s|Mean heliocentric velocity of cluster
+column=>Ty|int(2)||Morphological type in RC3 numeric system
+column=>Cluster|varchar(5)||Cluster name
+column=>Name1|varchar(15)||Galaxy name
+column=>Name2|varchar(24)||Alternative name
+column=>DelComa|numeric(6,3)||Log difference in distance modulus with respect to Coma Cluster
+column=>DAinv|int(5)|km/s|Angular distance from inverse fit in velocity units
+column=>DLinv|int(5)|km/s|Luminosity distance DL = DA*(1+V/c)**2 in velocity units
+end
+begin
+category=>Summary Distances
+catalog=>ENEARc DM
+abbreviation=>eneardm
+dbtable=>keneardm
+bibcode=>
+description=>Test build of ENEARc inverse fit moduli with CF2 zero point
+filename=>enear_dm_bar
+column=>pgc|int(7)||PGC number
+column=>Icnt|int(4)||Internal group ID
+column=>Dist|numeric(5,1)|Mpc|Distance, CF2 scale
+column=>DM|numeric(5,2)|mag|Distance modulus, CF2 scale
+column=>RAJ|varchar(8)|hms|Right Ascension (J2000)
+column=>DeJ|varchar(9)|damas|Declination (J2000)
+column=>A|numeric(6,3)||A = logDn - beta*(logSigma - 2.2)
+column=>LgDn|numeric(6,3)||Log Dn "Donald" parameter
+column=>eLgDn|numeric(5,3)||Error in log Dn
+column=>LSigma|numeric(5,3)|[lm/s]|Log central velocity dispersion
+column=>eSig|numeric(5,3)|[lm/s]|Error in log central velocity dispersion
+column=>Vhel|int(5)|km/s|Heliocentric velocity of galaxy
+column=>Ty|int(2)||Morphological type in RC3 numeric system
+column=>Bt|numeric(5,2)|mag|Blue magnitude
+column=>Cluster|varchar(10)||Cluster name
+column=>Name|varchar(15)||Galaxy name
+column=>DelVir|numeric(6,3)||Log difference in distance modulus with respect to Virgo Cluster
+column=>DAinv|int(5)|km/s|Angular distance from inverse fit in velocity units
+column=>DLinv|int(5)|km/s|Luminosity distance DL = DA*(1+V/c)**2 in velocity units
 end
 begin
 category=>Stellar Distances
@@ -2544,8 +2647,8 @@ column=>SDw|numeric(6,3)||Selection probability computed using Dw; see ref
 column=>logDwDn|numeric(5,2)|arcsec|Log of Dw computed from Dn; see ref
 column=>SDwDn|numeric(6,3)||Selection probability computed from Dw
 column=>icnt|int(4)||Internal group identification number
-column=>FP|int(2)||[0/1] 1=in fundamental plane sample, 1=not in
-column=>PV|int(2)||[0/1] 1=in peculiar velocity sample, 1=not in
+column=>FP|int(2)||[0/1] 1=in fundamental plane sample, 0=not in
+column=>PV|int(2)||[0/1] 1=in peculiar velocity sample, 0=not in
 column=>Name|varchar(9)||Cluster name (parenthesis = fore/background)
 column=>Ng|int(3)||No. galaxies used in distance determination
 column=>Lc|numeric(7,2)|deg|Galactic longitude
@@ -2609,7 +2712,7 @@ bibcode=>
 description=>Local Universe (LU) catalog: input for Numerical Action Models
 filename=>lucat_bar
 column=>pgc|int(7)||PGC number
-column=>Klum|numeric(9,3)|Lsun|Absolute K band luminosity (2MASS) at measured distance
+column=>Klum|float|Lsun|Absolute K band luminosity (2MASS) at measured distance
 column=>Dist|numeric(6,2)|Mpc|Distance 
 column=>eD|numeric(5,2)|Mpc|Error in distance
 column=>T|int(2)||Morphological type
