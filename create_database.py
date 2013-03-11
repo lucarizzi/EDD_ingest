@@ -43,7 +43,7 @@ coordinates_columns_info={}
 special_code=[]
 keywords =  ["category","catalog","abbreviation","dbtable","bibcode","description","filename"]
 for myline in f:
-
+   try: 
     myline_args=myline.lstrip().rstrip().split("=>")
 
     if myline_args[0]=="begin":
@@ -119,7 +119,10 @@ for myline in f:
              print "---------"
              print "Suggestion: copy and paste this statement into a mysql window and see what the problem is"
              exit()
-
+   except:
+     print "There is something wrong with this line in catalogs_info.dat:"
+     print myline
+     exit()
 
 # insert data into mysql tables
 print "Inserting data into ktables..."
