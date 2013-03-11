@@ -270,7 +270,7 @@ column=>Mod_SBF|numeric(5,2)|mag|Distance Modulus: SBF
 column=>Mod_ceph|numeric(5,2)|mag|Distance Modulus: Cepheid
 column=>Mod_TRGB|numeric(5,2)|mag|Distance Modulus: TRGB
 column=>Mod_other|numeric(5,2)|mag|Distance Modulus: other
-column=>Source|varchar(20)||Source of distance measure
+column=>Source|varchar(27)||Source of distance measure
 end
 begin
 category=>Summary Distances
@@ -443,6 +443,115 @@ column=>DM|numeric(5,2)|mag|Distance modulus: average of CF2 (given double weigh
 end
 begin
 category=>Summary Distances
+catalog=>All CF2 Cepheid
+abbreviation=>allceph
+dbtable=>kallceph
+bibcode=>
+description=>Test build of all Cepheid components of Cosmicflows-2
+filename=>allcf2ceph_bar
+column=>pgc|int(7)||PGC number
+column=>Dist|numeric(5,1)|Mpc|Distance (averaged if more than one source)
+column=>Name|varchar(10)||Common name
+column=>RAJ|varchar(8)|hms|Right Ascension (J2000)
+column=>DeJ|varchar(9)|damas|Declination (J2000)
+column=>Glon|numeric(8,4)|deg|Galactic longitude
+column=>Glat|numeric(8,4)|deg|Galactic latitude
+column=>SGL|numeric(8,4)|deg|Supergalactic longitude
+column=>SGB|numeric(8,4)|deg|Supergalactic latitude
+column=>Ty|numeric(4,1)||Morphological type; RC3 numeric code
+column=>Asfd|numeric(4,2)|mag|Reddening at B band from Schlegel et al (1998) dust maps
+column=>Asf|numeric(4,2)|mag|Reddening at B band from Schlafly & Finkbeiner (2011)
+column=>Btot|numeric(5,2)|mag|Total B magnitude from LEDA
+column=>Itot|numeric(5,2)|mag|Total I magnitude, average of CCD contributions 
+column=>Ks|numeric(5,2)|mag|2MASS Ks magnitude, extinction corrected from Huchra et al. 2012 or else Lavaux-Hudson 2011
+column=>b/a|numeric(4,2)||Minor to major axial ratio
+column=>Vhel|int(5)|km/s|Heliocentric velocity
+column=>Vgsr|int(5)|km/s|Velocity in Galactic standard of rest (circular velocity at Sun of 239 km/s; total velocity 251 km/s toward l=90,b=0)
+column=>Vls|int(5)|km/s|Velocity in Local Sheet standard of rest (Tully et al. 2008)
+column=>Vcmb|int(5)|km/s|Velocity in CMB standard of rest (Fixsen et al. 1996)
+column=>Icnt|int(4)||Internal group ID
+column=>2M++|int(4)||Group ID from 2MASS++ catalog of Lavaux & Hudson (2011)
+column=>Fil|numeric(5,1)||Filament ID from private analysis of V8k catalog
+column=>DMcep|numeric(5,2)|mag|Distance modulus from Cepheid Period Luminosity relation
+column=>NBG_ID|varchar(8)||NBG group ID
+column=>Ref|||Reference code: see Quality Distance catalog for code translation 
+column=>BibCode|varchar(19)||Bibliography Code
+end
+begin
+category=>Summary Distances
+catalog=>All CF2 TRGB Literature
+abbreviation=>alltlit
+dbtable=>ktrgblit
+bibcode=>
+description=>Test build of all miscellaneous components of Cosmicflows-2
+filename=>allcf2trgblit_bar
+column=>pgc|int(7)||PGC number
+column=>Dist|numeric(5,1)|Mpc|Distance (averaged if more than one source)
+column=>Name|varchar(10)||Common name
+column=>RAJ|varchar(8)|hms|Right Ascension (J2000)
+column=>DeJ|varchar(9)|damas|Declination (J2000)
+column=>Glon|numeric(8,4)|deg|Galactic longitude
+column=>Glat|numeric(8,4)|deg|Galactic latitude
+column=>SGL|numeric(8,4)|deg|Supergalactic longitude
+column=>SGB|numeric(8,4)|deg|Supergalactic latitude
+column=>Ty|numeric(4,1)||Morphological type; RC3 numeric code
+column=>Asfd|numeric(4,2)|mag|Reddening at B band from Schlegel et al (1998) dust maps
+column=>Asf|numeric(4,2)|mag|Reddening at B band from Schlafly & Finkbeiner (2011)
+column=>Btot|numeric(5,2)|mag|Total B magnitude from LEDA
+column=>Itot|numeric(5,2)|mag|Total I magnitude, average of CCD contributions 
+column=>Ks|numeric(5,2)|mag|2MASS Ks magnitude, extinction corrected from Huchra et al. 2012 or else Lavaux-Hudson 2011
+column=>b/a|numeric(4,2)||Minor to major axial ratio
+column=>Vhel|int(5)|km/s|Heliocentric velocity
+column=>Vgsr|int(5)|km/s|Velocity in Galactic standard of rest (circular velocity at Sun of 239 km/s; total velocity 251 km/s toward l=90,b=0)
+column=>Vls|int(5)|km/s|Velocity in Local Sheet standard of rest (Tully et al. 2008)
+column=>Vcmb|int(5)|km/s|Velocity in CMB standard of rest (Fixsen et al. 1996)
+column=>Icnt|int(4)||Internal group ID
+column=>2M++|int(4)||Group ID from 2MASS++ catalog of Lavaux & Hudson (2011)
+column=>Fil|numeric(5,1)||Filament ID from private analysis of V8k catalog
+column=>DMtrgb|numeric(5,2)|mag|Distance modulus from TRGB measurement from literature sources
+column=>NBG_ID|varchar(8)||NBG group ID
+column=>Reference|int(3)||Reference list; see Quality Distances catalog for translation of code
+column=>BibCode|varchar(19)||Bibliography code
+end
+begin
+category=>Summary Distances
+catalog=>All CF2 Miscellaneous
+abbreviation=>allmisc
+dbtable=>kmisc
+bibcode=>
+description=>Test build of all miscellaneous components of Cosmicflows-2
+filename=>allcf2misc_bar
+column=>pgc|int(7)||PGC number
+column=>Dist|numeric(5,1)|Mpc|Distance (averaged if more than one source)
+column=>Name|varchar(10)||Common name
+column=>RAJ|varchar(8)|hms|Right Ascension (J2000)
+column=>DeJ|varchar(9)|damas|Declination (J2000)
+column=>Glon|numeric(8,4)|deg|Galactic longitude
+column=>Glat|numeric(8,4)|deg|Galactic latitude
+column=>SGL|numeric(8,4)|deg|Supergalactic longitude
+column=>SGB|numeric(8,4)|deg|Supergalactic latitude
+column=>Ty|numeric(4,1)||Morphological type; RC3 numeric code
+column=>Asfd|numeric(4,2)|mag|Reddening at B band from Schlegel et al (1998) dust maps
+column=>Asf|numeric(4,2)|mag|Reddening at B band from Schlafly & Finkbeiner (2011)
+column=>Btot|numeric(5,2)|mag|Total B magnitude from LEDA
+column=>Itot|numeric(5,2)|mag|Total I magnitude, average of CCD contributions 
+column=>Ks|numeric(5,2)|mag|2MASS Ks magnitude, extinction corrected from Huchra et al. 2012 or else Lavaux-Hudson 2011
+column=>b/a|numeric(4,2)||Minor to major axial ratio
+column=>Vhel|int(5)|km/s|Heliocentric velocity
+column=>Vgsr|int(5)|km/s|Velocity in Galactic standard of rest (circular velocity at Sun of 239 km/s; total velocity 251 km/s toward l=90,b=0)
+column=>Vls|int(5)|km/s|Velocity in Local Sheet standard of rest (Tully et al. 2008)
+column=>Vcmb|int(5)|km/s|Velocity in CMB standard of rest (Fixsen et al. 1996)
+column=>Icnt|int(4)||Internal group ID
+column=>2M++|int(4)||Group ID from 2MASS++ catalog of Lavaux & Hudson (2011)
+column=>Fil|numeric(5,1)||Filament ID from private analysis of V8k catalog
+column=>DMmisc|numeric(5,2)|mag|Distance modulus from RR Lyr, Horizontal Branch, Eclipsing Binary, or Maser observations
+column=>NBG_ID|varchar(8)||NBG group ID
+column=>Reference|int(3)||Reference list; see Quality Distances catalog for translation of code
+column=>Me|varchar(2)||Method: RR Lyr (RR); Horizontal Branch (HB); Eclipsing Binary (EB); Maser (Ma)
+column=>BibCode|varchar(19)||Bibliography code
+end
+begin
+category=>Summary Distances
 catalog=>All CF2 SBF
 abbreviation=>allsbf
 dbtable=>kallsbf
@@ -483,6 +592,50 @@ column=>gmz|numeric(5,3)|mag|g-z color from Blakeslee et al.
 column=>zbar|numeric(5,2)|mag|SBF fluctuation magnitude from Blakeslee et al.
 column=>DMh|numeric(5,2)|mag|Distance modulus from Blakeslee et al. HST observations
 column=>eDMh|numeric(4,2)|mag|Error in Blakeslee et al. HST distance modulus
+column=>NBG_ID|varchar(8)||NBG group ID
+end
+begin
+category=>Summary Distances
+catalog=>All CF2 SNIa
+abbreviation=>allsn
+dbtable=>kallsn
+bibcode=>
+description=>Test build of all SN1a components of Cosmicflows-2
+filename=>allcf2sn_bar
+column=>pgc|int(7)||PGC number
+column=>Dist|numeric(5,1)|Mpc|Distance (averaged if more than one source)
+column=>Name|varchar(10)||Common name
+column=>RAJ|varchar(8)|hms|Right Ascension (J2000)
+column=>DeJ|varchar(9)|damas|Declination (J2000)
+column=>Glon|numeric(8,4)|deg|Galactic longitude
+column=>Glat|numeric(8,4)|deg|Galactic latitude
+column=>SGL|numeric(8,4)|deg|Supergalactic longitude
+column=>SGB|numeric(8,4)|deg|Supergalactic latitude
+column=>Ty|numeric(4,1)||Morphological type; RC3 numeric code
+column=>Asfd|numeric(4,2)|mag|Reddening at B band from Schlegel et al (1998) dust maps
+column=>Asf|numeric(4,2)|mag|Reddening at B band from Schlafly & Finkbeiner (2011)
+column=>Btot|numeric(5,2)|mag|Total B magnitude from LEDA
+column=>Itot|numeric(5,2)|mag|Total I magnitude, average of CCD contributions 
+column=>Ks|numeric(5,2)|mag|2MASS Ks magnitude, extinction corrected from Huchra et al. 2012 or else Lavaux-Hudson 2011
+column=>b/a|numeric(4,2)||Minor to major axial ratio
+column=>Vhel|int(5)|km/s|Heliocentric velocity
+column=>Vgsr|int(5)|km/s|Velocity in Galactic standard of rest (circular velocity at Sun of 239 km/s; total velocity 251 km/s toward l=90,b=0)
+column=>Vls|int(5)|km/s|Velocity in Local Sheet standard of rest (Tully et al. 2008)
+column=>Vcmb|int(5)|km/s|Velocity in CMB standard of rest (Fixsen et al. 1996)
+column=>Icnt|int(4)||Internal group ID
+column=>2M++|int(4)||Group ID from 2MASS++ catalog of Lavaux & Hudson (2011)
+column=>Fil|numeric(5,1)||Filament ID from private analysis of V8k catalog
+column=>SNIa|varchar(6)||Supernova ID
+column=>N|int(1)||No. SNIa contributions
+column=>DMav|numeric(5,2)|mag|Distance modulus averaged over all contributions, CF2 scale
+column=>DMu|numeric(5,2)|mag|Distance modulus from Union2 (Amanullah et. 2010), Union2 zero point 
+column=>eDMu|numeric(4,2)|mag|Error in Union2 distance modulus
+column=>DMj|numeric(5,2)|mag|Distance modulus from Jha et al. (2007), Union2 zero point 
+column=>eDMj|numeric(4,2)|mag|Error in Jha distance modulus
+column=>DMp|numeric(5,2)|mag|Distance modulus from Prieto et al. (2006), Union2 zero point 
+column=>eDMp|numeric(4,2)|mag|Error in Prieto distance modulus
+column=>DMh|numeric(5,2)|mag|Distance modulus from Hicken et al. (2009), Union2 zero point 
+column=>DMf|numeric(5,2)|mag|Distance modulus from Folatelli et al. (2010), Union2 zero point 
 column=>NBG_ID|varchar(8)||NBG group ID
 end
 begin
