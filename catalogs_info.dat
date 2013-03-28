@@ -213,7 +213,7 @@ column=>eV|int(3)|km/s|Error in velocity (zero if unmeasured)
 column=>SGX|numeric(7,2)|Mpc/h|Supergalactic X: 3D distance = Vls/100
 column=>SGY|numeric(7,2)|Mpc/h|Supergalactic Y: 3D distance = Vls/100
 column=>SGZ|numeric(7,2)|Mpc/h|Supergalactic Z: 3D distance = Vls/100
-column=>Gp_ID|Varchar(6)||Group ID in 2M++
+column=>Gp_ID|int(6)||Group ID in 2M++
 column=>c11|numeric(4,2)||Redshift incompleteness at magnitude K2M++ <=11.25
 column=>c12|numeric(4,2)||Redshift incompleteness at magnitude K2M++ <=12.25. If empty then in part of sky limited to 11.25
 column=>F1|int(4)||Flag: 1 if fake galaxy in zone of avoidance (see 2M++)
@@ -221,6 +221,52 @@ column=>F2|int(4)||Flag: 1 if obtained by cloning (see 2M++)
 column=>F3|int(4)||Flag: 1 if galaxy lies in exlusive region covered by 2MRS target mask
 column=>F4|int(4)||Flag: 1 if galaxy lies in non-exclusive region covered by SDSS
 column=>F5|int(4)||Flag: 1 if galaxy lies in non-exclusive region covered by 6dFGRS
+end
+begin
+category=>Summary Distances
+catalog=>Cosmicflows-2 Distances
+abbreviation=>cf2
+dbtable=>kcf2
+bibcode=>
+description=>Test build of Cosmicflows-2
+filename=>alld_test_bar
+column=>pgc|int(7)||PGC number
+column=>Dist|numeric(6,2)|Mpc|Distance (weighted average if more than one source)
+column=>DM|numeric(5,2)|mag|Distance modulus (weighted average if more than one source)
+column=>eDM|numeric(4,2)|mag|1 sigma error in distance modulus (from weights if more than one source)
+column=>Glon|numeric(8,4)|deg|Galactic longitude
+column=>Glat|numeric(8,4)|deg|Galactic latitude
+column=>SGL|numeric(8,4)|deg|Supergalactic longitude
+column=>SGB|numeric(8,4)|deg|Supergalactic latitude
+column=>Ty|int(2)||Morphological type; RC3 numeric code
+column=>Asfd|numeric(4,2)|mag|Reddening at B band from Schlegel et al (1998) dust maps
+column=>Btot|numeric(5,2)|mag|Total B magnitude from LEDA
+column=>Ks|numeric(5,2)|mag|2MASS Ks magnitude, extinction corrected from Huchra et al. 2012 or else Lavaux-Hudson 2011
+column=>Vhel|int(5)|km/s|Heliocentric velocity
+column=>Vgsr|int(5)|km/s|Velocity in Galactic standard of rest (circular velocity at Sun of 239 km/s; total velocity 251 km/s toward l=90,b=0)
+column=>Vls|int(5)|km/s|Velocity in Local Sheet standard of rest (Tully et al. 2008)
+column=>Vcmb|int(5)|km/s|Velocity in CMB standard of rest (Fixsen et al. 1996)
+column=>Name|varchar(10)||Common name
+column=>Icnt|int(4)||Internal group ID
+column=>2M++|int(4)||Group ID from 2MASS++ catalog of Lavaux & Hudson (2011)
+column=>Ndgp|int(3)||Number of galaxies with distance measures in group
+column=>Dgp|numeric(6,2)|Mpc|Distance to group
+column=>DMgp|numeric(5,2)|mag|Distance modulus to group
+column=>eDMgp|numeric(4,2)|mag|1 sigma error in group distance modulus
+column=>NV|int(3)||Number of galaxies with positions and velocities in group
+column=>Lgp|numeric(8,4)|deg|Galactic longitude of group
+column=>Bgp|numeric(8,4)|deg|Galactic latitude of group
+column=>SGLgp|numeric(8,4)|deg|Galactic longitude of group
+column=>SGBgp|numeric(8,4)|deg|Galactic latitude of group
+column=>Tgp|int(2)||Mean galaxy type in group
+column=>S_B|numeric(5,2)|mag|Total B magnitude summed across all members of group
+column=>S_K|numeric(5,2)|mag|Total Ks magnitude summed across all members of group
+column=>Vhgp|int(5)|km/s|Mean heliocentric velocity of group
+column=>Vggp|int(5)|km/s|Group mean velocity in Galactic standard of rest (circular velocity at Sun of 239 km/s; total velocity 251 km/s toward l=90,b=0)
+column=>Vlsgp|int(5)|km/s|Group velocity in Local Sheet standard of rest (Tully et al. 2008)
+column=>Vcgp|int(5)|km/s|Group velocity in CMB standard of rest (Fixsen et al. 1996)
+column=>Vrms|int(4)|km/s|Group r.m.s. velocity dispersion
+column=>GroupName|varchar(23)||Alternate names for group or cluster 
 end
 begin
 category=>Summary Distances
