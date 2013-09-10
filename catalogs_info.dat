@@ -233,7 +233,7 @@ filename=>alld_test_bar
 column=>pgc|int(7)||PGC number
 column=>Dist|numeric(6,2)|Mpc|Distance (weighted average if more than one source)
 column=>DM|numeric(5,2)|mag|Distance modulus (weighted average if more than one source)
-column=>eD|numeric(4,2)|mag|1 sigma error in fractional distance (from weights if more than one source)
+column=>eD|numeric(4,2)||1 sigma error in fractional distance (from weights if more than one source)
 column=>C|varchar(1)||Distance method: Cepheid Period-Luminosity relation
 column=>T|varchar(1)||Distance method: Tip of the Red Giant Branch from collaboration HST program (Jacobs et al. 2009)
 column=>L|varchar(1)||Distance method: Tip of the Red Giant Branch (literature)
@@ -259,11 +259,11 @@ column=>Vcmb|int(5)|km/s|Velocity in CMB standard of rest (Fixsen et al. 1996)
 column=>Vmod|int(5)|km/s|Velocity in CMB standard of rest adjusted in accordance with a cosmological model with Omega_matter=0.27 and Omega_Lambda=0.73
 column=>Name|varchar(10)||Common name
 column=>Icnt|int(4)||Internal group ID
-column=>2M++|int(4)||Group ID from 2MASS++ catalog of Lavaux & Hudson (2011)
+column=>2Mass|int(4)||Group ID from 2MASS++ catalog of Lavaux & Hudson (2011)
 column=>Ndgp|int(3)||Number of galaxies with distance measures in group
 column=>Dgp|numeric(6,2)|Mpc|Distance to group
 column=>DMgp|numeric(5,2)|mag|Distance modulus to group
-column=>eDgp|numeric(4,2)|mag|1 sigma error in fractional group distance 
+column=>eDgp|numeric(4,2)||1 sigma error in fractional group distance 
 column=>NV|int(3)||Number of galaxies with positions and velocities in group
 column=>Lgp|numeric(8,4)|deg|Galactic longitude of group
 column=>Bgp|numeric(8,4)|deg|Galactic latitude of group
@@ -970,9 +970,9 @@ column=>T_hi|numeric(5,2)|mag|1 sigma higher error estimate for Tip of the Giant
 column=>V-I|numeric(5,2)|mag|Johnson-Cousins V - I color of TRGB
 column=>e_lo|numeric(5,2)|mag|1 sigma lower error estimate for V - I color of TRGB
 column=>e_hi|numeric(5,2)|mag|1 sigma higher error estimate for V - I color of TRGB
-column=>E1_B-V|numeric(5,3)|mag|Differential B-V extinction from IRAS/DIRBE maps following Schlegel et al.
+column=>E1_B-V|numeric(5,3)|mag|Differential B-V extinction from IRAS/DIRBE maps following Schlegel et al. as modified by Schlafly & Finkbeiner (2011)
 column=>E2_B-V|numeric(5,3)|mag|Differential B-V extinction from Main Sequence displacement on CMD
-column=>A_814|numeric(5,3)|mag|Extinction in F814W band from Main Sequence displacement or IRAS/DIRBE maps
+column=>A_814|numeric(5,3)|mag|Extinction in F814W band from Main Sequence displacement or IRAS/DIRBE maps following Schlafly & Finkbeiner (2011)
 column=>M_TRGB|numeric(5,2)|mag|Absolute magnitude of the Tip of the Giant Branch (flight filter system) following Rizzi et al. 2007, ApJ, 661, 815
 column=>DM_tip|numeric(5,2)|mag|Distance Modulus from the Tip of the Giant Branch measurement
 column=>eDM_lo|numeric(5,2)|mag|1 sigma lower error estimate for TRGB distance modulus
@@ -3170,6 +3170,42 @@ column=>e_logDn|numeric(6,3)||Error in log Dn
 end
 begin
 category=>Supplementary Catalogs
+catalog=>MK Groups
+abbreviation=>MKgroups
+dbtable=>kmkgp
+bibcode=>2011MNRAS.412.2498M
+description=>Galaxy Groups and Clouds in the Local (z=0.01) Universe. D. Makarov & I. Karachentsev  2011, MNRAS, 412, 2498  Table 1 of 1089 groups modified and appended to catalog of 10,861 individual galaxies.
+filename=>mkgroups_bar
+column=>pgc|int(7)||PGC number
+column=>GpID|int(7)||LEDA group number
+column=>GpName|varchar(22)||Common name of brightest galaxy in group
+column=>Name|varchar(30)||Common name of individual galaxy
+column=>EquatorialCoord|varchar(16)|h,m,s;d,am,as|J2000 Right ascension and declination of individual galaxy
+column=>Vlg|int(4)|km/s|Radial velocity in Local Group reference frame (Karachentsev & Makarov 1996, AJ,111, 794) 
+column=>T|int(2)||Morphological type
+column=>Ks|numeric(5,2)|mag|2MASS Ks magnitude
+column=>GpCoord|varchar(16)|h,m,s;d,am,as|J2000 Right ascension and declination of group
+column=>NGp|int(3)||Number of galaxies in group
+column=>GpV|int(4)|km/s|Mean group radial velocity in Local Group reference frame
+column=>rmsV|int(4)|km/s|Standard deviation of group member velocities not corrected for measurement errors
+column=>Rh|int(3)|kpc|Mean harmonic radius of group with distance from mean group velocity and H0=73 km/s/Mpc
+column=>lgL|numeric(5,2)|Lsun|Logarithm of total luminosity of group in 2MASS Ks band (M_K(sun) = 3.28 mag)
+column=>lgM|numeric(6,2)|Msun|Logarithm of projected mass of group following Heisler et al (1985, Eq 11)
+column=>ML|numeric(6,2)|solar|Mass to light ratio
+column=>lgMc|numeric(7,2)|Msun|Logarithm of projected mass of group following Heisler et al (1985, Eq 11) corrected for measurement errors
+column=>MLc|numeric(5,2)|solar|Mass to light ratio corrected for measurement errors
+column=>ii|numeric(5,2)||Logarithm of isolation inex
+column=>pgc1|int(7)||PGC number of brightest galaxy in group
+column=>Name1|varchar(24)||Common name of brightest galaxy in group
+column=>T1|int(2)||Morphological type of brightest galaxy in group
+column=>Ks1|numeric(5,2)|mag|2MASS Ks magnitude of brightest galaxy in group
+column=>pgc2|int(7)||PGC number of 2nd brightest galaxy in group
+column=>Name2|varchar(30)||Common name of 2nd brightest galaxy in group
+column=>T2|int(2)||Morphological type of 2nd brightest galaxy in group
+column=>Ks2|numeric(5,2)|mag|2MASS Ks magnitude of 2nd brightest galaxy in group
+end
+begin
+category=>Supplementary Catalogs
 catalog=>Local Universe (LU)
 abbreviation=>lucat
 dbtable=>klucat
@@ -3205,11 +3241,11 @@ column=>Pl|int(2)||Plane? 1,2,3 are around M31, 11,12 are around Cen A
 end
 begin
 category=>Supplementary Catalogs
-catalog=>Replenished Catalog of Nearby Galaxies
+catalog=>Updated Nearby Galaxy Catalog
 abbreviation=>rcng
 dbtable=>krcng
-bibcode=>
-description=>Replenished Catalog of Nearby Galaxies. I.D. Karachentsev D.I. Makarov & E.I. Kaisina  2012 in press Tables 1&2 combined.
+bibcode=>2013AJ....145..101K
+description=>Updated Nearby Galaxy Catalog. I.D. Karachentsev D.I. Makarov & E.I. Kaisina  2013, AJ, 145:101 Tables 1&2 combined.
 filename=>RCNG_bar
 column=>pgc|int(8)||PGC number
 column=>Name|varchar(17)||Common name
@@ -3673,8 +3709,8 @@ column=>Vpec_O|numeric(7,0)|km/s|Peculiar velocity: dipole+quadrupole+octopole m
 end
 begin
 category=>Supplementary Catalogs
-catalog=>MK Groups
-abbreviation=>MKgroups
+catalog=>MK Groups (orig)
+abbreviation=>MKgroups0
 dbtable=>kmkgroups
 bibcode=>
 description=>Group catalog by D. Makarov and I. Karachentsev; 2011 MNRAS 412 2498
