@@ -1,0 +1,35 @@
+== Organize the TRGB Galaxy Webpages ==
+
+## Path ##
+
+TRGB related files are located at /data2/LV on huchra. Each galaxy has its own directory, whose name should be the same as it shown on the TRGB distance information page. Files from different HST programs are under separate sub-directories, indicated by the HST program number. Take NGC300 for example. It is observed by 3 HST programs, therefore there are 3 sub-directories under /data2/LV/NGC300 : 
+/data2/LV/NGC300/8584 
+/data2/LV/NGC300/9162 
+/data2/LV/NGC300/10915 
+
+## File Names ##
+
+The galaxy webpage is controlled by the php program: 
+/home/huchra/distance/public_html/get_cmd.php. 
+
+All related files should be put under the corresponding directory:
+/data2/LV/"Galaxy_Name"/"HSTprogram#" ,
+and should follow the naming system that the program can identify them and show them with correct picture title.
+
+--Name List--
+
+ CMD -- *gif.WEB
+ clipped CMD -- *cmdclip.gif.WEB
+ xy file -- *xy.jpg.WEB
+ dolphot photometry -- *phot.WEB
+ footprint image -- *jpg.WEB
+ psuedo color image (4000x4000 pixel) -- *color.jpg.WEB
+ small psuedo color image (600x600 pixel) -- *color600.jpg.WEB
+ small Postage Stamp image of the target galaxy -- *poststamp.jpg.WEB
+
+Notes:
+ 1) The asterisk can be any string, not necessarily the galaxy name. The program does not check.
+ 2) The *phot.WEB file must exist to show everything correctly.
+ 3) Clicking on the CMD will link to the dolphot photometry text file (*phot.WEB).
+
+

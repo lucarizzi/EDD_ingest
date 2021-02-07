@@ -1,0 +1,105 @@
+Dear Brent
+
+I have given the user distance on huchra full access to the remote repository where I keep the code.
+
+Let me try to explain how this work.
+
+git is a software revision control system that is based on the concept of storing entire snapshots of a directory.
+Each snapshot is called a "commit", and it's identified by a long sequence of numbers that you don't really have to remember or use.
+
+You currently have a copy of the repository sitting in the directory EDD_ingest in your local computer huchra.
+The same repository is stored remotely on a public website called github, and it's also stored locally on my computer on my desk, what we will called luca-imac.
+
+The basic operations that you can do are:
+
+1. clone. Done at the very beginning to create your local copy of a remote repository. Already done in your case
+2. make sure your local copy is up to date, meaning: download any change I might have made without you knowing it:
+
+git pull origin master
+
+3. make changes. For example editing the file catalogs_info.dat as you did.
+4. check which files have been changed since the last time the repository was synchronized with the 
+
+git status
+
+it will tell you that you have changed catalogs_info.dat
+It might tell you that other files have been changed, but unless you made those changes and you want everybody else to know about it, ignore.
+
+5. add the file you have just changed to the next "commit" or snapshot
+
+git add catalogs_info.dat
+
+6. take a snapshot. At this stage you tell the software revision control that you are happy with the changes you have made, and you consider them worthy of being registered and propagated
+
+git commit -m "MESSAGE" 
+
+Replace MESSAGE with any string you like, for example: " Added Tonry SBF"
+
+so what is the situation now:
+1. you have a local copy of the repository that is more advance than both my copy (on my mac) and the remote repository on the github site.
+2. nobody else know of your changes
+
+That is not good.
+
+We need to propagate your changes.
+
+7. Push your changes to the central repository on github
+
+git push origin master
+
+
+You might be asked for a password. If you are,  ask me. It's the Cosmic Influenza version 2 (decode that?)  Cosmicflu2
+
+Huchra now connects to github, and sends the changes you have made, which is basically the updated catalogs_info.dat
+
+You can connect to the github website if you want:
+
+http://github.com
+User:
+EDDsDB
+Password:
+CosmicFlu2
+cosmic influenza number 2
+
+
+In summary:
+
+if you know you are going to make changes, make sure you are up to date:
+git pull origin master
+make changes to MYFILE
+git add MYFILE
+git commit -m "why did I change it?"
+git push origin master
+
+Note that I have already done all of this for your last changes.
+
+Your student Matt seems to be very versed on using git, and can be of help in using it.
+
+I know it sounds complicated at first, it took me a while to get used to it, but the advantage is that we can distribute the code (and keep it updated) on multiple sites, and that if we make any error we can go back to any previous snapshot without any problem
+
+Luca
+
+..............
+Examining errors during execution of python script to update EDD
+
+Entering mysql window
+
+On a terminal as user distance on huchra, type
+mysql -u distance -p
+Type password when asked
+Then once inside MySQL
+use EDDsDB
+And then paste the command that the software was suggesting
+Password CosmicFlu2
+
+.............
+2013, May 2
+
+If having trouble with usual command to update database of
+python create_database.py
+
+then switch to
+
+unsetenv PYTHONPATH
+
+/usr/bin/python create_database.sql

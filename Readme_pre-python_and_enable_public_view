@@ -1,0 +1,124 @@
+20071220
+
+catalogs.pl updated to allow for categories in catalogs definition.
+also, all the UPDATE commands have been tranferred to the new syntax, with > ' < 
+to start and end lines, and > " < to indicate column names.
+
+20080125
+
+HOW TO UPDATE DATABASE:
+cd dim/perl
+
+make drop
+make create_noxcorr
+
+if there are errors:
+make drop
+
+ *** THIS IS OPTIONAL BUT HELPS
+psql hl        (this enter the postgresql command line interface)
+-> delete from kcolumns;
+-> delete from ktables;
+\q             (this exits the postgresql command line interface)
+***********************************
+
+make create_noxcorr >& error
+wait...
+look into error and see what is going on
+
+*** IF THE ERROR IS: table xxx already exists. **********************
+It means that make drop is unable to delete the corresponding table.
+Fix: 
+psql hl
+drop table XXX;
+\q
+Might be useful to check if other tables are stuck in there.
+the command: 
+\z 
+gives you the list of table.
+manually delete every table that starts with the letter "k"
+*********************************************************************
+
+
+if no errors:
+make test_mysql
+(takes about 5 minutes)
+
+cd dim/mysql
+
+20091211   here is the temporary fix for the missing galaxies:
+
+  cp ../update_PGC_numbers.sh .
+  sh update_PGC_numbers.sh
+  *** check the file PGC.list.new to verify it looks ok: it is a slightly longer version of the file pgc ***
+  cp PGC.list.new pgc
+
+mysql -u distance -p < create.sql
+when asked for password: 100Mpc
+
+On Huchra:
+
+Top 3 lines of create.sql should make reference to EDDsDB rather than DISTANCEdim
+
+mysql -u distance -p EDDsDB < create.sql
+when asked for password: CosmicFlu2
+
+**********************************************************************
+
+ENABLING ACCESS IN EDD (instructions from Shaya 2012/05/11)
+
+Within the directory /home/huchra/distance/dim
+
+*** 2015/01/08: Ed made simplified copy of createEDDDB.sql -> cedd.sql ***
+
+Catalog kwhatever NOT shown in public EDD, add line
+
+and dbtable != 'kwhatever'
+
+
+To enable an entire catalog:
+edit createEDDDB.sql by adding a line
+
+CREATE VIEW kxxxx AS SELECT * FROM EDDsDB.kxxxx
+
+To enable rows within a catalog:
+
+CREATE VIEW kxxxx AS SELECT * FROM EDDsDB kxxxx WHERE P=1
+
+Run with:
+
+XXX mysql -u distance -p < createEDDDB.sql XXX
+2015, January becomes
+
+mysql -u distance -p < cedd.sql
+
+CosmicFlu2
+
+This is the fast version (no xcorr with LEDA).
+If all goes well, go back and use make create instead of make create_noxcorr
+this takes about 2 hours
+
+..........
+
+Just in case it gets lost, here is update_PGC_numbers.sh
+
+#!/bin/sh
+\rm PGC_NOTSORTED
+touch PGC_NOTSORTED
+cat create.sql | grep INFILE | cut -d \" -f 2 | grep -v PGC > database_list
+
+for f in `cat database_list`; do
+         cut -d "|" -f 1 $f >> PGC_NOTSORTED
+done
+
+cat PGC_NOTSORTED | sed s/pgc//g | sort -nk1 | sed s/" "//g | sed '/^0/d' | grep -v k| sort -n | uniq | awk 'NF>0 {print $0}' | grep -v No> PGC.list.new
+
+echo YOU HAVE PGC.list.new!!!!
+echo Check that it is correct and replace PGC.list
+echo Then run mysql -u distance -p < create.sql
+
+Cheers,
+  Luca
+
+
+
