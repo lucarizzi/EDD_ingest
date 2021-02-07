@@ -195,6 +195,12 @@ for table in tables:
   format = format[:-1]
   # insert data into database
   print "inserting data into database..."
+  print "Checking health of lines to be inserted"
+  for line in data_from_file:
+      if len(line) != num_columns:
+          print("A Line has a problem:\n")
+          print(line)
+          exit()
   cur=db.cursor()
   cur.executemany("INSERT INTO "+dbtable+" VALUES ("+format+")",data_from_file)
   db.commit()
