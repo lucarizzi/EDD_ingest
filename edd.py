@@ -1,6 +1,6 @@
 import os
 import sys
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import angles
 import EDD_config
 
@@ -8,6 +8,7 @@ def create_tables(db):
   cur=db.cursor()
   cur.execute("CREATE TABLE ktables ( \
    dbtable varchar(255) primary key not null, \
+   ID_catal INT, \
    category varchar(255) , \
    bibcode varchar(19) , \
    catalog varchar(255) , \
@@ -35,27 +36,27 @@ def create_tables(db):
 def define_leda_columns(db):
 
   leda_columns=[]
-  leda_columns.append((" kleda","al1950             ","hour            ","RA 1950 (hours decimal value)   ","\N                              ","r            ","%10.5f"))
-  leda_columns.append((" kleda","de1950             ","deg             ","DEC 1950 (degrees decimal value)     ","\N                              ","r            ","%10.5f"))
-  leda_columns.append((" kleda","al2000             ","hour            ","RA 2000 (hours decimal value)  ","\N                              ","r            ","%10.5f"))
-  leda_columns.append((" kleda","de2000             ","deg             ","DEC 2000 (degrees decimal value)  ","\N                              ","r            ","%10.5f"))
-  leda_columns.append((" kleda","l2                 ","deg             ","Galactic longitude    ","\N                              ","r            ","%10.5f"))
-  leda_columns.append((" kleda","b2                 ","deg             ","Galactic latitude    ","\N                              ","r            ","%10.5f"))
-  leda_columns.append((" kleda","sgl                ","deg             ","Galactic longitude      ","\N                              ","r            ","%10.5f"))
-  leda_columns.append((" kleda","sgb                ","deg             ","Galactic latitude        ","\N                              ","r            ","%10.5f"))
-  leda_columns.append((" kleda","t                  ","\N              ","Morphological type code      ","\N                              ","r            ","%5.1f"))
-  leda_columns.append((" kleda","e_t                ","\N              ","Actual error on t            ","\N                              ","r            ","%5.1f"))
-  leda_columns.append((" kleda","logr25             ","\N              ","log of axis ratio (major axis/minor axis)      ","\N                              ","r            ","%8.2f"))
-  leda_columns.append((" kleda","e_logr25           ","\N              ","log of axis ratio (major axis/minor axis)    ","\N                              ","r            ","%8.2f"))
-  leda_columns.append((" kleda","mg2                ","mag             ","Central Lick Mg2 index     ","\N                              ","r            ","%6.4f"))
-  leda_columns.append((" kleda","incl               ","deg             ","Inclination between line of sight and polar axis    ","\N                              ","r            ","%6.1f"))
-  leda_columns.append((" kleda","lambda             ","\N              ","Luminosity index       ","\N                              ","r            ","%6.2f"))  
-  leda_columns.append((" kleda","bri25              ","mag/arcsec2     ","Mean surface brightness within isophote 25    ","\N                              ","r            ","%6.2f"))
-  leda_columns.append((" kleda","vrot               ","km/s            ","Maximum rotation velocity corrected for inclination      ","\N                              ","r            ","%6.1f"))
-  leda_columns.append((" kleda","e_vrot             ","km/s            ","Actual error on vrot       ","\N                              ","r            ","%6.1f"))
-  leda_columns.append((" kleda","hic                ","mag             ","21-cm index bt-m21c in magnitude     ","\N                              ","r            ","%6.2f"))
-  leda_columns.append((" kleda","lc                 ","\N              ","Luminosity class code      ","src.class.luminosity            ","r            ","%5.1f"))
-  leda_columns.append((" kleda","e_lc               ","\N              ","Actual error on lc       ","stat.error;src.class.luminosity ","r            ","%5.1f"))
+  leda_columns.append((" kleda","al1950             ","hour            ","RA 1950 (hours decimal value)   ",r"\N                              ","r            ","%10.5f"))
+  leda_columns.append((" kleda","de1950             ","deg             ","DEC 1950 (degrees decimal value)     ",r"\N                              ","r            ","%10.5f"))
+  leda_columns.append((" kleda","al2000             ","hour            ","RA 2000 (hours decimal value)  ",r"\N                              ","r            ","%10.5f"))
+  leda_columns.append((" kleda","de2000             ","deg             ","DEC 2000 (degrees decimal value)  ",r"\N                              ","r            ","%10.5f"))
+  leda_columns.append((" kleda","l2                 ","deg             ","Galactic longitude    ",r"\N                              ","r            ","%10.5f"))
+  leda_columns.append((" kleda","b2                 ","deg             ","Galactic latitude    ",r"\N                              ","r            ","%10.5f"))
+  leda_columns.append((" kleda","sgl                ","deg             ","Galactic longitude      ",r"\N                              ","r            ","%10.5f"))
+  leda_columns.append((" kleda","sgb                ","deg             ","Galactic latitude        ",r"\N                              ","r            ","%10.5f"))
+  leda_columns.append((" kleda","t                  ",r"\N              ","Morphological type code      ",r"\N                              ","r            ","%5.1f"))
+  leda_columns.append((" kleda","e_t                ",r"\N              ","Actual error on t            ",r"\N                              ","r            ","%5.1f"))
+  leda_columns.append((" kleda","logr25             ",r"\N              ","log of axis ratio (major axis/minor axis)      ",r"\N                              ","r            ","%8.2f"))
+  leda_columns.append((" kleda","e_logr25           ",r"\N              ","log of axis ratio (major axis/minor axis)    ",r"\N                              ","r            ","%8.2f"))
+  leda_columns.append((" kleda","mg2                ","mag             ","Central Lick Mg2 index     ",r"\N                              ","r            ","%6.4f"))
+  leda_columns.append((" kleda","incl               ","deg             ","Inclination between line of sight and polar axis    ",r"\N                              ","r            ","%6.1f"))
+  leda_columns.append((" kleda","lambda             ",r"\N              ","Luminosity index       ",r"\N                              ","r            ","%6.2f"))  
+  leda_columns.append((" kleda","bri25              ","mag/arcsec2     ","Mean surface brightness within isophote 25    ",r"\N                              ","r            ","%6.2f"))
+  leda_columns.append((" kleda","vrot               ","km/s            ","Maximum rotation velocity corrected for inclination      ",r"\N                              ","r            ","%6.1f"))
+  leda_columns.append((" kleda","e_vrot             ","km/s            ","Actual error on vrot       ",r"\N                              ","r            ","%6.1f"))
+  leda_columns.append((" kleda","hic                ","mag             ","21-cm index bt-m21c in magnitude     ",r"\N                              ","r            ","%6.2f"))
+  leda_columns.append((" kleda","lc                 ",r"\N              ","Luminosity class code      ","src.class.luminosity            ","r            ","%5.1f"))
+  leda_columns.append((" kleda","e_lc               ",r"\N              ","Actual error on lc       ","stat.error;src.class.luminosity ","r            ","%5.1f"))
   leda_columns.append((" kleda","logd25             ","log(0.1 arcmin) ","log of apparent diameter (d25 in 0.1 arcmin)    ","phys.angSize.smajAxis           ","r            ","%8.2f"))
   leda_columns.append((" kleda","e_logd25           ","log(0.1 arcmin) ","Actual error on logd25     ","stat.error;phys.angSize.smajAxis","r            ","%8.2f"))
   leda_columns.append((" kleda","pa                 ","deg             ","Major axis position angle (North Eastwards)     ","pos.posAng                      ","r            ","%6.1f"))
@@ -98,18 +99,18 @@ def define_leda_columns(db):
   leda_columns.append((" kleda","vgsr               ","km/s            ","Radial velocity (cz) with respect to the GSR    ","src.veloc                       ","r            ","%8.0f"))
   leda_columns.append((" kleda","vvir               ","km/s            ","Radial velocity (cz) corrected for LG infall onto Virgo       ","src.veloc                       ","r            ","%8.0f"))
   leda_columns.append((" kleda","v3k                ","km/s            ","Radial velocity (cz) with respect to the CMB radiation         ","src.veloc                       ","r            ","%8.0f"))
-  leda_columns.append((" kleda","modz               ","\N             ","\N   ","\N            ","r            ","%6.2f"))
-  leda_columns.append((" kleda","mod0               ","\N             ","\N    ","\N            ","r            ","%6.2f"))
+  leda_columns.append((" kleda","modz               ",r"\N             ",r"\N   ",r"\N            ","r            ","%6.2f"))
+  leda_columns.append((" kleda","mod0               ",r"\N             ",r"\N    ",r"\N            ","r            ","%6.2f"))
   leda_columns.append((" kleda","mabs               ","mag             ","Absolute B-band magnitude    ","phys.magAbs;em.opt.B            ","r            ","%6.2f"))                                    
-  leda_columns.append((" kleda","objname            ","\N              ","Principal name ","\N                              ","r            ","%30s"))
-  leda_columns.append((" kleda","objtype            ","\N              ","Type of object (G=galaxy; S=Star ...)   ","\N                              ","r            ","%7s"))
-  leda_columns.append((" kleda","type               ","\N              ","Morphological type      ","src.morph.type                  ","r            ","%5s"))
-  leda_columns.append((" kleda","bar                ","\N              ","Barred galaxy (B)   ","\N                              ","r            ","%4s"))
-  leda_columns.append((" kleda","ring               ","\N              ","Galaxy with ring (R)     ","\N                              ","r            ","%5s"))
-  leda_columns.append((" kleda","multiple           ","\N              ","Multiple galaxy (M)     ","meta.code.multip                ","r            ","%9s"))
-  leda_columns.append((" kleda","compactness        ","\N              ","Compact (C) or diffuse (D)      ","\N                              ","r            ","%14s"))
-  leda_columns.append((" kleda","angclass           ","\N              ","ANGCLASS      ","\N                              ","r            ","%14s"))
-  leda_columns.append((" kleda","pgc                ","\N              ","PGC number   ","\N                              ","r            ","%06d"))
+  leda_columns.append((" kleda","objname            ",r"\N              ","Principal name ",r"\N                              ","r            ","%30s"))
+  leda_columns.append((" kleda","objtype            ",r"\N              ","Type of object (G=galaxy; S=Star ...)   ",r"\N                              ","r            ","%7s"))
+  leda_columns.append((" kleda","type               ",r"\N              ","Morphological type      ","src.morph.type                  ","r            ","%5s"))
+  leda_columns.append((" kleda","bar                ",r"\N              ","Barred galaxy (B)   ",r"\N                              ","r            ","%4s"))
+  leda_columns.append((" kleda","ring               ",r"\N              ","Galaxy with ring (R)     ",r"\N                              ","r            ","%5s"))
+  leda_columns.append((" kleda","multiple           ",r"\N              ","Multiple galaxy (M)     ","meta.code.multip                ","r            ","%9s"))
+  leda_columns.append((" kleda","compactness        ",r"\N              ","Compact (C) or diffuse (D)      ",r"\N                              ","r            ","%14s"))
+  leda_columns.append((" kleda","angclass           ",r"\N              ","ANGCLASS      ",r"\N                              ","r            ","%14s"))
+  leda_columns.append((" kleda","pgc                ",r"\N              ","PGC number   ",r"\N                              ","r            ","%06d"))
 
   # we are missing mucin mup and lgg
   
@@ -216,7 +217,7 @@ def copy_leda_orig_into_leda(db):
   columns=[x[0].lstrip().rstrip() for x in results]
   # turn into a string separated by comma
   columns=",".join(columns)
-  print "Creating a new kleda from kleda_orig using columns: "+columns
+  print("Creating a new kleda from kleda_orig using columns: "+columns)
   cursor.execute("drop table if exists kleda;")
   db.commit()
   cursor.execute("Create table kleda select "+columns+" from kleda_orig;")
@@ -231,19 +232,19 @@ def copy_leda_orig_into_leda(db):
   db.commit()
   # make sure we display kleda
   cursor.execute('INSERT into ktables values\
-    ("kleda","Redshift Catalogs","NULL","LEDA","LEDA","LEDA database","NULL","NULL");')
+    ("kleda",0,"Redshift Catalogs","NULL","LEDA","LEDA","LEDA database","NULL","NULL");')
   db.commit()
   # calculate RA and DEC from al2000 de2000
-  print "reading ra and dec..."
+  print("reading ra and dec...")
   cursor.execute("Select al2000,de2000 from kleda;")
   results=cursor.fetchall()
   cursor.close()
   cursor=db.cursor()
-  print "transforming into new format..."
+  print("transforming into new format...")
   ra = ["" if x[0] is None else str(angles.fmt_angle(float(x[0]),lower=0,upper=24,pre=1)).replace("+","").replace(" ","") for x in results]
   dec = ["" if x[1] is None else str(angles.fmt_angle(float(x[1]),lower=-90,upper=90,pre=1)).replace(" ","") for x in results]
   #dec = ["" if x is "" else x[:7] for x in dec]
-  print "reading kleda ..."
+  print("reading kleda ...")
   cursor.execute("select * from kleda;")
   results=cursor.fetchall()
   results=[list(x) for x in results]
@@ -257,7 +258,7 @@ def copy_leda_orig_into_leda(db):
   cursor.execute("INSERT INTO kcolumns(dbtable,tabcolumn,units,description,ucd,justification,format) VALUES ('kleda','DEC2000','deg','Declination (J2000)','','r','%12s');")
   db.commit()
 
-  print "adding RA and DEC..."
+  print("adding RA and DEC...")
   for k in range(len(results)):
     results[k].append(ra[k])
     results[k].append(dec[k])
@@ -267,15 +268,15 @@ def copy_leda_orig_into_leda(db):
   cursor=db.cursor()
   format = "%s,"*len(results[0])
   format = format[:-1]
-  print "lines to add to leda: "+str(len(results))
-  print "now inserting into kleda with new coordinates..."
-  print results[0]
+  print("lines to add to leda: "+str(len(results)))
+  print("now inserting into kleda with new coordinates...")
+  print(results[0])
   for data in results:
       try:
         cursor.execute("Insert into kleda values("+format+");",data)
       except:
-        print "Error: cannot add the data:"
-        print data
+        print("Error: cannot add the data:")
+        print(data)
       
   db.commit()
   cursor.close()
@@ -297,16 +298,17 @@ def generate_kleda_orig_from_lyon(db,elements):
   leda=[]
   # cycle through pgc numbers to build the query string
   query=""
-  print "Querying leda..."
-  #print (pgcs)
-  for ind in range(len(pgcs)):
+  print("Querying leda...")
+  for ind in range((len(pgcs))):
      query=query+"%20or%20pgc%3D"+str(pgcs[ind])
      if (ind % 200 == 0 or ind>=len(pgcs)-1):
-         print "Query results ... "+str(ind)+"/"+str(len(pgcs)-1)
+         print("Query results ... "+str(ind)+"/"+str(len(pgcs)-1))
          query=query[5:]
-         url='http://leda.univ-lyon1.fr/leda/fullsqlmean.cgi?Query=select%20*%20where'+query
-         result=urllib2.urlopen(url)
+         url='http://leda.univ-lyon1.fr/fullsqlmean.cgi?Query=select%20*%20where%20'+query
+         #print(url);
+         result=urllib.request.urlopen(url)
          for myline in result:
+             myline = myline.decode('utf8').strip()
              if "<" in myline:
                  continue
              if myline=="":
@@ -321,30 +323,30 @@ def generate_kleda_orig_from_lyon(db,elements):
                  continue
              elements.pop()
              if (elements):
-               print elements[:3]
+               print(elements[:3])
                leda.append((elements))
          query=""
   if (leda):
    num=len(leda[1])
-   print "number of elements is "+str(num)
-   print leda[0]
-   print leda[1]
+   print("number of elements is "+str(num))
+   print(leda[0])
+   print(leda[1])
    format = "%s,"*num
    format = format[:-1]
 
    #insert data into database
-   print "inserting data into database..."
+   print("inserting data into database...")
    cur=db.cursor()
-   cur.executemany("INSERT INTO kleda_orig VALUES ("+format+")",leda) 
+   cur.executemany("INSERT IGNORE INTO kleda_orig VALUES ("+format+")",leda) 
    db.commit()
-   print "New data has been downloaded from Lyon. You should create an updated leda_bar file."
+   print("New data has been downloaded from Lyon. You should create an updated leda_bar file.")
    answer=query_yes_no("Would you like to update the leda_bar file now ?",default="yes")
    if (answer=="yes"):
      generate_leda_bar_file(db)
 
-   print "--------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+   print("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
   else:
-   print "No results returned from leda"
+   print("No results returned from leda")
 
 def drop_leda_table(db):
   cur=db.cursor()
@@ -368,7 +370,7 @@ def generate_leda_bar_file(db):
       line=["" if x is None else str(x) for x in line]
       outputline='|'.join(line)+"\n"
       #print outputline
-      f.write(outputline)
+      f.write(outputline.encode())
   f.close()
 
 
@@ -400,10 +402,10 @@ def query_yes_no(question, default="no"):
 
     while 1:
         sys.stdout.write(question + prompt)
-        choice = raw_input().lower()
+        choice = input().lower()
         if default is not None and choice == '':
             return default
-        elif choice in valid.keys():
+        elif choice in list(valid.keys()):
             return valid[choice]
         else:
             sys.stdout.write("Please respond with 'yes' or 'no' "\
@@ -429,8 +431,8 @@ def determine_format(format):
         format1=format0[1].replace(')','')
         return "%"+format1+"s"
       except:
-        print "Error in converting format: "
-        print format0
+        print("Error in converting format: ")
+        print(format0)
         exit()
     if format0[0]=="numeric":
         format1=format0[1].split(',')
@@ -439,7 +441,7 @@ def determine_format(format):
     if format0[0]=="int":
         format1=format0[1].replace(')','')
         return "%"+format1+"d"
-    print "Format "+format+" cannot be converted... exiting."
+    print("Format "+format+" cannot be converted... exiting.")
     exit
 
 def calculate_el_de(table, positions,remove):
@@ -470,22 +472,28 @@ def calculate_el_de(table, positions,remove):
     if remove:
       # remove the part of the line containing coordinates and the next |
       counter=positions[6][2]
-      while line[int(counter)] != "|":
+      while counter<len(line) and line[int(counter)] != "|":
         counter=counter+1
       #print "line before:"+line
       line=line[:int(positions[0][1])]+line[counter+1:]
       #print "line after:"+line
     #print RAh, RAm, RAs
     #print DEsign, DEd, DEm, DEs
-    el = float(RAh)+float(RAm)/60+float(RAs)/3600
-    de = float(DEd)+float(DEm)/60+float(DEs)/3600
+    try:
+        el = float(RAh)+float(RAm)/60+float(RAs)/3600
+    except:
+        el=0
+    try:
+        de = float(DEd)+float(DEm)/60+float(DEs)/3600
+    except:
+        de=0
 
     if DEsign=="-":
       de=-de
     # add the coordinates at the end of the line
     line=line+"|"+str(el)+"|"+str(de)
     output_table.append(line)
-  print table[0]
-  print output_table[0]
+  print(table[0])
+  print(output_table[0])
   return output_table  
 

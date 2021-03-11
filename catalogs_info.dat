@@ -101,7 +101,7 @@ column=>GLat|numeric(8,4)|deg|Galactic latitude
 column=>SGL|numeric(8,4)|deg|Supergalactic longitude
 column=>SGB|numeric(8,4)|deg|Supergalactic latitude
 column=>Ty|numeric(4,1)||Numeric type from LEDA
-column=>B_t|numeric(5,2)|mag|Bt total magnitude from LEDA
+column=>B_tb|numeric(5,2)|mag|Bt total magnitude from LEDA corrected by Ag, galacting obscuration
 column=>K_t|numeric(5,2)|mag|Ks total magnitude, extinction corrected
 column=>lgL_K|numeric(5,2)|suns|Log intrinsic K luminosity at group distance
 column=>Vhel|int(4)|km/s|Heliocentric velocity
@@ -110,8 +110,8 @@ column=>Vls|int(4)|km/s|Velocity in Local Sheet reference frame (Tully et al. 20
 column=>V3k|int(4)|km/s|Velocity in CMB frame (Kogut+93)
 column=>D_i|numeric(6,2)|Mpc|Measured distance for individual galaxy
 column=>eDi|int(3)||Percent error in measured distance
-column=>PGC1|int(7)||PGC identification of brightest member of group
-column=>PGC1+|int(7)||PGC identification of brightest member of association
+column=>1PGC|int(7)||PGC identification of brightest member of group
+column=>1PGC+|int(7)||PGC identification of brightest member of association
 column=>Ng|int(4)||Number of group members
 column=>gGLong|numeric(8,4)|deg|Galactic longitude of group, average weighted by luminosity 
 column=>gGLat|numeric(8,4)|deg|Galactic latitude of group, average weighted by luminosity 
@@ -202,7 +202,7 @@ column=>lgL_K|numeric(5,2)|suns|Log intrinsic K luminosity at group distance; d=
 column=>lgden|numeric(5,2)|suns/Mpc^3|Log smoothed luminosity density at nearest point on 1 Mpc/h grid
 column=>Nest|int(6)||Nest ID; north 1xxxxx
 column=>Ng|int(3)||Number of group (nest) members in 2MRS K<11.75
-column=>PGC1|int(7)||PGC identification of brightest member of group
+column=>1PGC|int(7)||PGC identification of brightest member of group
 column=>V3kg|int(5)|km/s|Velocity of group in CMB frame (no cosmological correction)
 column=>D_v|numeric(5,1)|Mpc|Distance D=Vgp/100 Mpc (with cosmological adjustment)
 column=>DM|numeric(5,2)|mag|Distance modulus from velocity assuming H=100 km/s/Mpc
@@ -253,7 +253,7 @@ column=>lgL_K|numeric(5,2)|suns|Log intrinsic K luminosity at group distance; d=
 column=>lgden|numeric(5,2)|suns/Mpc^3|Log smoothed luminosity density at nearest point on 1 Mpc/h grid
 column=>Nest|int(6)||Nest ID; south 2xxxxx
 column=>Ng|int(3)||Number of group (nest) members in 2MRS K<11.75
-column=>PGC1|int(7)||PGC identification of brightest member of group
+column=>1PGC|int(7)||PGC identification of brightest member of group
 column=>V3kg|int(5)|km/s|Velocity of group in CMB frame (no cosmological correction)
 column=>D_v|numeric(5,1)|Mpc|Distance D=Vgp/100 Mpc (with cosmological adjustment)
 column=>DM|numeric(5,2)|mag|Distance modulus from velocity assuming H=100 km/s/Mpc
@@ -420,7 +420,7 @@ catalog=>Tempel SDSS DR10 Clipped
 abbreviation=>tempel
 dbtable=>ktempel
 bibcode=>2014A&A...566A...1T
-description=>Abbreviated version of galaxy table with group affiliations (only zcmb<0.1) from Tempel et alA&A,566,A1
+description=>Abbreviated version of galaxy table with group affiliations (only zcmb<0.1) from Tempel et al. 2014,A&A,566,A1
 filename=>tempel_sdss0.1_clipped_bar
 column=>pgc|int(7)||PGC number
 column=>ID|int(6)||ID in Tempel+14 galaxy catalog
@@ -495,7 +495,7 @@ column=>Dgp|numeric(5,1)|Mpc|Luminosity distance to group
 column=>Abell|varchar(5)||Abell cluster ID; ASxxx are from southern supplement list
 column=>GroupName|varchar(9)||Alternate name for group or cluster 
 column=>NV|int(3)||Number of galaxies with positions and velocities in group
-column=>PGC1|int(7)||PGC ID of dominant galaxy in group
+column=>1PGC|int(7)||PGC ID of dominant galaxy in group
 column=>Glongp|numeric(6,2)|deg|Galactic latitude of group
 column=>Glatgp|numeric(6,2)|deg|Galactic longitude of group
 column=>SGLgp|numeric(8,4)|deg|Supergalactic longitude of group
@@ -561,6 +561,48 @@ column=>SGYg|numeric(7,2)|Mpc|Supergalactic Y distance from origin assuming dist
 column=>SGZg|numeric(7,2)|Mpc|Supergalactic Z distance from origin assuming distance Dg
 column=>Abell|varchar(5)||Abell cluster ID; ASxxx are from southern supplement list
 column=>GroupName|varchar(9)||Alternate name for group or cluster 
+end
+begin
+category=>Summary Distances
+catalog=>Lilow-Nusser CF3 Peculiar Velocities
+abbreviation=>lilow
+dbtable=>klilow
+bibcode=>
+description=>Reconstructed peculiar velocities for CF3 galaxies and groups from Lilow & Nusser arXiv:2102.07291
+filename=>LilowNusser_bar
+column=>pgc|int(7)||PGC number
+column=>dg|numeric(5,1)|Mpc|Luminosity distance to group from Lilow-Nusser model
+column=>edg|numeric(4,1)|Mpc|Uncertainty in group distance from uncertainty in peculiar velocity
+column=>Name|varchar(11)||Common name
+column=>RAJ|varchar(8)|hms|Right Ascension (J2000)
+column=>DeJ|varchar(9)|damas|Declination (J2000)
+column=>Glon|numeric(8,4)|deg|Galactic longitude
+column=>Glat|numeric(8,4)|deg|Galactic latitude
+column=>SGL|numeric(8,4)|deg|Supergalactic longitude
+column=>SGB|numeric(8,4)|deg|Supergalactic latitude
+column=>Vhel|int(5)|km/s|Heliocentric velocity
+column=>Vls|int(5)|km/s|Velocity in Local Sheet standard of rest (Tully et al. 2008)
+column=>Vcmb|int(5)|km/s|Velocity in CMB standard of rest (Fixsen et al. 1996)
+column=>Vpr|int(6)|km/s|Peculiar velocity in line-of-sight for individual galaxy
+column=>Vpx|int(6)|km/s|Peculiar velocity along Galactic X axis for individual galaxy
+column=>Vpy|int(6)|km/s|Peculiar velocity along Galactic Y axis for individual galaxy
+column=>Vpz|int(6)|km/s|Peculiar velocity along Galactic Z axis for individual galaxy
+column=>Nest|int(6)||2MASS "nest" group ID
+column=>1PGC|int(7)||PGC ID of dominant galaxy in group
+column=>Glongp|numeric(6,2)|deg|Galactic latitude of group
+column=>Glatgp|numeric(6,2)|deg|Galactic longitude of group
+column=>SGLgp|numeric(8,4)|deg|Supergalactic longitude of group
+column=>SGBgp|numeric(8,4)|deg|Supergalactic latitude of group
+column=>NV|int(3)||Number of galaxies with positions and velocities in group
+column=>Vgphel|int(5)|km/s|Heliocentric velocity of group
+column=>Vgpls|int(5)|km/s|Velocity of group in Local Sheet standard of rest (Tully et al. 2008)
+column=>Vgpcmb|int(5)|km/s|Velocity of group in CMB standard of rest (Fixsen et al. 1996)
+column=>Vpgpr|int(6)|km/s|Peculiar velocity in line-of-sight for galaxy group
+column=>Vpgpx|int(6)|km/s|Peculiar velocity along Galactic X axis for galaxy group
+column=>Vpgpy|int(6)|km/s|Peculiar velocity along Galactic Y axis for galaxy group
+column=>Vpgpz|int(6)|km/s|Peculiar velocity along Galactic Z axis for galaxy group
+column=>eV|int(6)|km/s|Uncertainty in peculiar velocity components
+column=>flag|int(2)||Flag: -1 if Local Group velocity of group negative; 1 if beyond 20,300 km/s; 0 otherwise
 end
 begin
 category=>Summary Distances
@@ -630,7 +672,7 @@ bibcode=>
 description=>All CF4 adjusted TFR distances
 filename=>TFR_CF4_components_bar
 column=>pgc|int(7)||PGC number
-column=>PGC1|int(7)||PGC identification of brightest member of group
+column=>1PGC|int(7)||PGC identification of brightest member of group
 column=>Nest|int(6)||2MASS "nest" group ID
 column=>Vcmb|int(5)|km/s|Radial velocity (cz) with respect to the CMB radiation 
 column=>Vmod|int(5)|km/s|Velocity in CMB frame; cosmological adjustment described in CF2 data paper
@@ -667,7 +709,7 @@ filename=>SNIa_CF4_components_bar
 column=>pgc|int(7)||PGC number
 column=>SNIa|varchar(13)||SNIa name; multiple SN ID separated by /
 column=>IDT14g|int(5)||Group ID in Tempel 2014 SDSS group catalog
-column=>PGC1|int(7)||PGC identification of brightest member of group
+column=>1PGC|int(7)||PGC identification of brightest member of group
 column=>Vcmb|int(5)|km/s|Radial velocity (cz) with respect to the CMB radiation 
 column=>Vmod|int(5)|km/s|Velocity in CMB frame; cosmological adjustment described in CF2 data paper
 column=>DM_av|numeric(5,2)|mag|Weighted average distance moduli (w=1/sigma^2)
@@ -702,7 +744,7 @@ bibcode=>
 description=>All CF4 adjusted SBF distances
 filename=>SBF_CF4_components_bar
 column=>pgc|int(7)||PGC number
-column=>PGC1|int(7)||PGC identification of brightest member of group
+column=>1PGC|int(7)||PGC identification of brightest member of group
 column=>Vcmb|int(5)|km/s|Radial velocity (cz) with respect to the CMB radiation
 column=>Vmod|int(5)|km/s|Velocity in CMB frame; cosmological adjustment described in CF2 data paper
 column=>DM_av|numeric(5,2)|mag|Weighted average distance moduli (w=1/sigma^2)
@@ -761,7 +803,7 @@ column=>DM|numeric(5,2)|mag|Distance modulus
 column=>eDM|numeric(4,2)|mag|Uncertainty in distance modulus
 column=>d|numeric(5,1)|Mpc|Distance
 column=>Vhel|numeric(7,1)|km/s|Heliocentric velocity of maser 
-column=>PGC1|int(7)||PGC ID of dominant group member
+column=>1PGC|int(7)||PGC ID of dominant group member
 column=>Nest|int(6)||2MASS nest ID from Tully(2015)
 column=>Ng|int(2)||Number of group members
 column=>gV3k|int(5)|km/s|Group velocity in CMB frame
@@ -784,7 +826,7 @@ filename=>TF_CF4_master_bar
 column=>pgc|int(7)||PGC number
 column=>DMbest|numeric(5,2)|mag|Best distance moduli (either DM<riz> or DM_W1, priority goes to optical moduli)
 column=>eDMbest|numeric(5,2)|mag|Uncertainty in DMbest (either the median of [eDMr, eDMi, eDMz] or eDM_W1)
-column=>PGC1|int(7)||PGC ID of dominant member of group
+column=>1PGC|int(7)||PGC ID of dominant member of group
 column=>Nest|int(6)||Group (nest) ID in 2MASS group catalog of Tully(2015)
 column=>Vh|int(5)|km/s|Heliocentric velocity
 column=>Vls|int(5)|km/s|Velocity in Local Sheet reference frame (Tully et al. 2008)
@@ -1089,7 +1131,7 @@ description=>Distance revisions motivated by Qin et al. 2018, MNRAS, 477, 5150; 
 filename=>6dFGSv_recal_bar
 column=>pgc|int(7)||PGC number
 column=>rej|int(1)||1 if rejected in duel 6dFGSv-SDSS analysis by Said et al. 2020,MNRAS,497,1275
-column=>PGC1|int(7)||PGC ID of dominant member of group
+column=>1PGC|int(7)||PGC ID of dominant member of group
 column=>Nest|int(6)||Nest ID from 2MASS K<11.75 group catalog (Tully 2015) 
 column=>Name|varchar(15)||6dFGS catalog name
 column=>Vcmb|int(5)|km/s|Velocity of galaxy in CMB frame
@@ -1163,7 +1205,7 @@ column=>Kt|numeric(5,2)|mag|Total 2MASS K magnitude from LEDA
 column=>V|int(5)|km/s|Heliocentric velocity of galaxy from LEDA
 column=>Ag|numeric(5,2)|mag|Foreground B band obscuration from Schlegel et al.
 column=>Nest|int(6)||2Mass groups nest ID (Tully 2015)
-column=>PGC1|int(7)||PGC ID of brightest group member
+column=>1PGC|int(7)||PGC ID of brightest group member
 column=>Ng|int(3)||Number of 2MASS group members
 column=>Vgm|int(5)|km/s|Group velocity, CMB frame, adjusted with cosmological model
 column=>Sigp|int(4)|km/s|Group velocity dispersion calculated from K luminosity
@@ -1233,7 +1275,7 @@ column=>Vls|int(5)|km/s|Velocity in Local Sheet rest frame
 column=>Vcmb|int(5)|km/s|Velocity in CMB frame
 column=>Vmod|int(5)|km/s|Velocity in CMB frame with cosmological correction
 column=>f|numeric(5,3)||Cosmological correction to velocities
-column=>PGC1|int(7)||PGC ID of brightest group member
+column=>1PGC|int(7)||PGC ID of brightest group member
 column=>Nest|int(6)||Nest ID from Tully(2015) 2MRS groups catalog
 column=>glon|numeric(8,4)|deg|Galactic longitude
 column=>glat|numeric(8,4)|deg|Galactic latitude
@@ -1352,7 +1394,7 @@ column=>DMsfi|numeric(5,2)|mag|Distance modulus determined from SFI++ luminosity
 column=>Dsfi|numeric(5,1)|Mpc|Distance determined from SFI++ luminosity-linewidth analysis, Springob et al (2007); mid_IR calibration
 column=>DM|numeric(5,2)|mag|Distance modulus: average of CF2 (given double weight) and SFI++; mid_IR calibration
 column=>Nest|int(6)||2MASS nest ID from Tully (2015)
-column=>PGC1|int(7)||PGC ID of brightest group member
+column=>1PGC|int(7)||PGC ID of brightest group member
 column=>Ndg|int(3)||Number of galaxies with distance measurements in group
 column=>DMg|numeric(5,2)|mag|Distance modulus from combined CF2 and SFI TF samples
 column=>eDMg|numeric(4,2)|mag|Error in group distance modulus
@@ -1607,7 +1649,7 @@ description=>Test build of all FP components of Cosmicflows-2
 filename=>3fp_bar
 column=>pgc|int(7)||PGC number
 column=>Dist|numeric(5,1)|Mpc|Distance (averaged if more than one source); mid_IR calibration
-column=>PGC1|int(7)||PGC ID of brightest group member
+column=>1PGC|int(7)||PGC ID of brightest group member
 column=>Nest|int(6)||Nest ID drawn from Tully(2015) 2MRS group catalog
 column=>Name|varchar(10)||Common name
 column=>RAJ|varchar(8)|hms|Right Ascension (J2000)
@@ -1747,7 +1789,7 @@ bibcode=>
 description=>Test build of all SN1a components of Cosmicflows-3
 filename=>cf3sn_bar
 column=>pgc|int(7)||PGC number
-column=>PGC1|int(7)||PGC ID of dominant group member
+column=>1PGC|int(7)||PGC ID of dominant group member
 column=>Nest|int(6)||2MASS group ID
 column=>Dist|numeric(5,1)|Mpc|Distance (averaged if more than one source); mid-IR calibration
 column=>Name|varchar(10)||Common name
@@ -1796,7 +1838,7 @@ bibcode=>
 description=>compilation of TRGB distances for CF4 TF ZP calibration as of 2019/11/08 
 filename=>CF4_trgb_bar
 column=>pgc|int(7)||PGC number
-column=>Name|varchar(8)||Common name
+column=>Name|varchar(20)||Common name
 column=>DM|numeric(5,2)|mag|Distance modulus (sources: EDD CMDs/TRGB catalog; Jang & Lee 2017)
 column=>eDM|numeric(4,2)|mag|Uncertainty in distance modulus
 column=>DM19|numeric(6,3)|mag|Distance modulus on Riess+19 cepheid scale
@@ -2064,7 +2106,7 @@ filename=>sbf_tonryIV_table_bar
 column=>pgc|int(7)||PGC number
 column=>objname|varchar(8)||Name used by Tonry et al. (Paper IV)
 column=>Modc|numeric(5,2)|mag|Distance modulus: adjusted Blakeslee et al. 2010, ApJ 694, 556
-column=>PGC1|int(7)||PGC ID of dominant group member
+column=>1PGC|int(7)||PGC ID of dominant group member
 column=>Nest|int(6)||Nest ID from 2MASS group catalog of Tully(2015)
 column=>al2000|numeric(7,3)|h|Right ascension in decimal degrees epoch 2000
 column=>de2000|numeric(7,3)|deg|Declination in decimal degrees epoch 2000
@@ -2102,7 +2144,7 @@ bibcode=>2009ApJ...694..556B
 description=>Blakeslee et al. 2009 ApJ 694 556 (ACS Fornax SBF survey Paper V) Tables 1 and 2 combined.
 filename=>hstsbf_for-vir_bar
 column=>pgc|int(7)||PGC number
-column=>PGC1|int(7)||PGC ID of dominant group member
+column=>1PGC|int(7)||PGC ID of dominant group member
 column=>J2000|varchar(16)||Right ascension and declination, epoch 2000
 column=>Name|varchar(7)||Primary name in publication
 column=>g-z|numeric(5,3)|mag|Mean g475-z850 color of analyzed region
@@ -2125,7 +2167,7 @@ description=>Mieske S. Hilker M. & Infante L. 2005 A&A 438 103 (Hydra/Centaurus 
 filename=>mieske_hydra-cen_bar
 column=>pgc|int(7)||PGC number
 column=>Name|varchar(5)||Primary name in publication
-column=>PGC1|int(7)||PGC ID of dominant member of group
+column=>1PGC|int(7)||PGC ID of dominant member of group
 column=>Nest|int(6)||Group nest ID in 2MASS group catalog by Tully(2015)
 column=>GpID|int(4)||Tully 3000 group identification number
 column=>RAJ|varchar(10)|hms|Right ascension, epoch 2000
@@ -2166,7 +2208,7 @@ column=>eD|numeric(3,1)|Mpc|Uncertainty in distance (excluding zero point)
 column=>DM|numeric(5,2)|mag|Distance modulus
 column=>edm|numeric(4,2)|mag|Error in distance modulus
 column=>Vhel|int(5)|km/s|Heliocentric velocity
-column=>PGC1|int(7)||PGC ID of dominant group member
+column=>1PGC|int(7)||PGC ID of dominant group member
 column=>Nest|int(6)||Group ID in 2MASS group catalog of Tully (2015)
 column=>Gp|varchar(5)||Group assignment by Cantiello et al.
 column=>Ty|numeric(4,1)||Morphological type code from RC3
@@ -2197,7 +2239,7 @@ description=>Private compilation of HST IR SBF distances provided by Joe Jensen
 filename=>irsbf_bar
 column=>pgc|int(7)||PGC number
 column=>Name|varchar(9)||Common name
-column=>PGC1|int(7)||PGC ID of dominant member of group
+column=>1PGC|int(7)||PGC ID of dominant member of group
 column=>Nest|int(6)||Nest ID in 2MASS group catalog of Tully (2015)
 column=>DM|numeric(6,3)|mag|Distance modulus
 column=>edm|numeric(5,3)|mag|Error in distance modulus
@@ -2519,7 +2561,7 @@ description=>Private SNIa compilation provided by Dillon Brout & Dan Scolnic
 filename=>PANTHEONPLUS_bar
 column=>pgc|int(7)||PGC number of host galaxy
 column=>SNIa|varchar(11)||Supernova identification
-column=>PGC1|int(7)||PGC ID of dominant galaxy in group
+column=>1PGC|int(7)||PGC ID of dominant galaxy in group
 column=>Nest|int(6)||Nest ID in 2MASS group catalog of Tully (2015)
 column=>DM|numeric(7,4)|mag|Distance modulus averaged over all contributions
 column=>eDM|numeric(6,4)|mag|Error in Pantheonplus distance modulus
@@ -2551,7 +2593,7 @@ description=>Combined 3 private tables provided by Dan Scolnic,2017-19
 filename=>scolnic_3tables_bar
 column=>pgc|int(7)||PGC number of host galaxy
 column=>SNIa|varchar(12)||Supernova identification
-column=>PGC1|int(7)||PGC ID of dominant member of group
+column=>1PGC|int(7)||PGC ID of dominant member of group
 column=>Nest|int(6)||Group ID from 2MASS group catallog of Tully(2015)
 column=>Tab|int(1)||Scolnic table: 1 = Pantheon; 2 = 2018; 3 = 2017
 column=>DM|numeric(6,3)|mag|Scolnic's best distance modulus
@@ -2710,7 +2752,7 @@ description=>Carnegie Supernova Project I final release: Burns et al. 2018, ApJ,
 filename=>CSP1_burns18_bar
 column=>pgc|int(7)||PGC number of host galaxy
 column=>SNIa|varchar(6)||Supernova identification
-column=>PGC1|int(7)||PGC ID of dominant member of group
+column=>1PGC|int(7)||PGC ID of dominant member of group
 column=>Nest|int(6)||Nest ID in 2MASS group catalog by Tully(2015)
 column=>muCV|numeric(5,2)|mag|Cross-validated distance modulus (Riess16 zero point)
 column=>emu|numeric(4,2)|mag|Error in distance modulus
@@ -2745,7 +2787,7 @@ description=>Lick Observatory Supernova Search: Ganeshalingam, LI & Filippenko 2
 filename=>LOSS_bar
 column=>pgc|int(7)||PGC number of host galaxy
 column=>SNIa|varchar(9)||Supernova identification
-column=>PGC1|int(7)||PGC ID of dominant group member
+column=>1PGC|int(7)||PGC ID of dominant group member
 column=>Nest|int(6)||Nest ID in 2MASS group catalog by Tully(2015)
 column=>RA|varchar(11)|hms|Right ascension J2000
 column=>Dec|varchar(11)|dms|Declination J2000
@@ -2771,7 +2813,7 @@ description=>Test sample by Aaron Do; 2020/08/20
 filename=>do_sne_bar
 column=>pgc|int(7)||PGC ID of host galaxy
 column=>SNIa|varchar(5)||Supernova identification
-column=>PGC1|int(7)||PGC ID of dominant group member
+column=>1PGC|int(7)||PGC ID of dominant group member
 column=>Nest|int(6)||Nest ID in 2MASS group catalog of Tully(2015)
 column=>DM|numeric(6,3)|mag|Preliminary distance modulus
 column=>zhel|numeric(8,6)||Redshift of host in heliocentric frame
@@ -4979,7 +5021,56 @@ column=>e_logDn|numeric(6,3)||Error in log Dn
 end
 begin
 category=>Fundamental Plane
-catalog=>FP: SDSS Distances
+catalog=>FP: SDSS Distances.v3
+abbreviation=>sdssfpdistv2
+dbtable=>ksdssfpdistv2
+bibcode=>
+description=>FP distance parameters from SDSS FP analysis by Howlett & Said (version 3: 2021/02/03) 
+filename=>sdss_fp_distances_v3_bar
+column=>pgc|int(7)||PGC number
+column=>logD|numeric(9,6)||Log distance ratio with respect to a fiducial distance cz/H_fiducial
+column=>elogD|numeric(9,6)||Error in log distance ratio
+column=>skew|numeric(9,6)||Log distance ratio skewness
+column=>logDc|numeric(9,6)||Corrected (Howlett & Said 2021) log distance ratio with respect to a fiducial distance cz/H_fiducial
+column=>elogDc|numeric(9,6)||Error in corrected log distance ratio
+column=>cz|int(5)|km/s|Velocity in CMB frame
+column=>gcz|int(5)|km/s|Velocity in CMB frame of Tempel+14 group
+column=>V3kg|int(5)|km/s|Velocity of 1PGC group in CMB frame
+column=>V3kt14|int(5)|km/s|Velocity in CMB frame of Tempel+14 group
+column=>Nest|int(6)||Nest ID from 2MASS group catalog of Tully 2015
+column=>1PGC|int(7)||PGC ID of dominant galaxy in Nest
+column=>IDt14|int(5)||Group ID in Tempel+14 SDSS DR10 group catalog
+column=>Ngt14|int(4)||Number of galaxies in Tempel+14 group 
+column=>J2000|varchar(16)|hmsdds|Right ascension & declination J2000 in hours, minutes, seconds and degrees, minutes seconds
+column=>Ra|numeric(10,6)|deg|Right ascension J2000 in degrees
+column=>Dec|numeric(10,6)|deg|Declination J2000 in degrees
+column=>glon|numeric(9,5)|deg|Galactic longitude
+column=>glat|numeric(9,5)|deg|Galactic latitude
+column=>sgl|numeric(9,5)|deg|Galactic longitude
+column=>sgb|numeric(9,5)|deg|Galactic latitude
+column=>r|numeric(9,6)||r=log R_e where R_e is the intrinsic effective radius in kpc/h derived from the angular effective radius theta_0
+column=>er|numeric(8,6)||Uncertainty in r
+column=>s|numeric(8,6)||s=log sigma_0 where sigma_0 is the central velocity dispersion in km/s
+column=>es|numeric(8,6)||Uncertainty in s
+column=>i|numeric(8,6)||i=log I_e where I_e is the mean surface brightness within the angular effective radius (see Eq 8 & 9 in Said+20) in L_sun/pc^2 
+column=>ei|numeric(8,6)||Uncertainty in i
+column=>kcor|numeric(8,6)|mag|r-band k-correction from Chilingarian (2014) using g-r colors
+column=>ext|numeric(8,6)|mag|r-band Galactic extinction from Schlafly & Finkbeiner (2011)
+column=>rmag|numeric(8,5)|mag|SDSS r magnitude
+column=>gmag|numeric(8,5)|mag|SDSS g magnitude
+column=>snr|numeric(9,6)||Signal/noise ratio of SDSS r magnitude
+column=>In|int(1)||1: in SDSS_NYU VAGC DR7 footprint; 0: outside footprint
+column=>Bar_N|numeric(8,6)||Number density per (Mpc/h)^3
+column=>M|int(1)||Galaxy morphology: 0=unclear; 1=spiral; 2=elliptical (Tempel 2014)
+column=>jrl|int(1)||Visual classification: 0=spiral, 1=elliptical
+column=>pel|numeric(5,2)||GalaxyZoo probability of being an elliptical galaxy; -1=unknown
+column=>nvot|int(5)||Number of GalaxyZoo votes used to determine p_el
+column=>objid|varchar(19)||SDSS objid
+column=>specid|varchar(19)||SDSS specid
+end
+begin
+category=>Fundamental Plane
+catalog=>FP: SDSS Distances.v1
 abbreviation=>sdssfpdist
 dbtable=>ksdssfpdist
 bibcode=>
@@ -4987,8 +5078,8 @@ description=>FP distance parameters from SDSS FP analysis by Howlett & Said
 filename=>sdss_fp_distances_bar
 column=>pgc|int(7)||PGC number
 column=>Nest|int(6)||Nest ID from 2MASS group catalog of Tully 2015
-column=>PGC1|int(7)||PGC ID of dominant galaxy in Nest
-column=>V3kg|int(5)|km/s|Velocity of PGC1 group in CMB frame
+column=>1PGC|int(7)||PGC ID of dominant galaxy in Nest
+column=>V3kg|int(5)|km/s|Velocity of 1PGC group in CMB frame
 column=>IDt14|int(5)||Group ID in Tempel+14 SDSS DR10 group catalog
 column=>Ngt14|int(3)||Number of galaxies in Tempel+14 group 
 column=>V3kt14|int(5)|km/s|Velocity in CMB frame of Tempel+14 group
@@ -5034,8 +5125,8 @@ description=>FP parameters from SDSS FP analysis by Said et al. 2020,MNRAS,497,1
 filename=>sdss_fp_v1_extended_bar
 column=>pgc|int(7)||PGC number
 column=>Nest|int(6)||Nest ID from 2MASS group catalog of Tully 2015
-column=>PGC1|int(7)||PGC ID of dominant galaxy in Nest
-column=>V3kg|int(5)|km/s|Velocity of PGC1 group in CMB frame
+column=>1PGC|int(7)||PGC ID of dominant galaxy in Nest
+column=>V3kg|int(5)|km/s|Velocity of 1PGC group in CMB frame
 column=>IDt14|int(5)||Group ID in Tempel+14 SDSS DR10 group catalog
 column=>Ngt14|int(3)||Number of galaxies in Tempel+14 group 
 column=>V3kt14|int(5)|km/s|Velocity in CMB frame of Tempel+14 group
@@ -5885,7 +5976,7 @@ column=>GLong|numeric(8,4)|deg|Galactic longitude
 column=>GLat|numeric(8,4)|deg|Galactic latitude
 column=>SGL|numeric(8,4)|deg|Supergalactic longitude
 column=>SGB|numeric(8,4)|deg|Supergalactic latitude
-column=>PGC1|int(7)||PGC ID of dominant galaxy in group
+column=>1PGC|int(7)||PGC ID of dominant galaxy in group
 column=>Nest|int(6)||2MASS group ID (Tully 2015)
 column=>Vmodg|int(5)|km/s|average group velocity in CMB frame; cosmological adjustment described in CF2 data paper
 column=>Nkt|int(3)||Number of galaxies in KT17 group (Kourkchi & Tully, 2017, ApJ, 843, 16)
@@ -5905,25 +5996,28 @@ bibcode=>
 description=>CF4 Baryonic Tully-Fisher distances
 filename=>BTFR_CF4_Dist_bar
 column=>pgc|int(7)||PGC number
+column=>flag|int(4)||1:good cases, 0:outlier)
 column=>DM_av|numeric(5,2)|mag|Average of DM_riz and DM_W1 (where both available)
 column=>DM_riz|numeric(5,2)|mag|Distance Modulus from the SDSS optical baryonic TF 
+column=>eDM_riz|numeric(5,2)|mag|Uncertainty in distance modulus from the SDSS optical baryonic TF
 column=>DM_W1|numeric(5,2)|mag|Distance Modulus from the WISE infrared baryonic TF relation at W1-band
-column=>PGC1|int(7)||PGC ID of dominant galaxy in group
+column=>eDM_W1|numeric(5,2)|mag|Uncertainty in	distance modulus from the WISE infrared baryonic TF relation at W1-band
+column=>1PGC|int(7)||PGC ID of dominant galaxy in group
 column=>Nest|int(6)||2MASS group ID (Tully 2015)
 column=>logMs_riz|numeric(6,3)|[Msun]|Log stellar mass, from the average rel'n between stellar mass and SDSS optical luminosity at r, i and z
 column=>logMs_W1|numeric(6,3)|[Msun]|Log stellar mass, from the average rel'n between stellar mass and WISE infrared luminosity at W1
-column=>logM_gass|numeric(6,3)|[Msun]|Log gas mass, including the contribution of atomic Hydrogen and 33% Hellium
+column=>logM_gas|numeric(6,3)|[Msun]|Log gas mass, including the contribution of atomic Hydrogen and 33% Hellium
 column=>logMb|numeric(6,3)|[Msun]|Log total baryon mass, including the sellar and gas mass
 column=>Vhel|int(5)|km/s|Heliocentric velocity 
 column=>Vls|int(5)|km/s|Velocity in Local Sheet reference frame (Tully et al. 2008)
 column=>v3k                |int(5)          |km/s            |Radial velocity (cz) with respect to the CMB radiation  
-column=>Vmod|int(5)|km/s|Velocity in CMB frame; cosmological adjustment described in CF2 data paper
-column=>f|numeric(7,3)||Cosmology correction term: f = Vmod / v3k
+column=>f|numeric(7,3)||Cosmology correction term: f=1.+0.5*(1.-q0)*z-(1./6)*(1.-q0-3.*q0**2+1.)*z**2 where q0=0.5*(0.27-2.*0.73)
 column=>lgWmxi|numeric(7,3)|[km/s]|Log linewidth approximating twice inclination corrected maximum rotation
 column=>elgWi|numeric(7,3)|[km/s]|Uncertainty in log linewidth
 column=>F21|numeric(6,2)|Jy.km/s|HI line flux
 column=>e_F21|numeric(6,2)|Jy.km/s|Uncertainty of HI line flux
 column=>inc|int(3)|deg|Inclination from face on
+column=>einc|int(3)|deg|Uncertainty in inclination from face on
 column=>g***|numeric(5,2)|mag|Chosen SDSS g-band fully corrected, including host absorption
 column=>r***|numeric(5,2)|mag|Chosen SDSS r-band fully corrected, including host absorption
 column=>i***|numeric(5,2)|mag|Chosen SDSS i-band fully corrected, including host absorption
@@ -5941,6 +6035,60 @@ column=>Nkt|int(3)||Number of galaxies in KT17 group (Kourkchi & Tully, 2017, Ap
 column=>N15|int(3)||Number of galaxies in T15 group (Tully, R.B. 2015, AJ, 149, 171)
 column=>SGLg|numeric(8,4)|deg|Supergalactic longitude of group, average weighted by luminosity 
 column=>SGBg|numeric(8,4)|deg|Supergalactic latitude of group, average weighted by luminosity 
+column=>Vhg|int(5)|km/s|average group velocity in heliocentric frame
+column=>Vlsg|int(5)|km/s|average group velocity in Local Sheet frame
+column=>V3kg|int(5)|km/s|average group velocity in CMB frame
+column=>fg|numeric(7,3)||Cosmology correction term: f=1.+0.5*(1.-q0)*z-(1./6)*(1.-q0-3.*q0**2+1.)*z**2 where q0=0.5*(0.27-2.*0.73)
+end
+begin
+category=>Supplementary Catalogs
+catalog=>All CF4 BTF-distances (H75-->Mass_hi)
+abbreviation=>cf4btfdistances_H75
+dbtable=>cf4btfdistances_H75
+bibcode=>
+description=>CF4 Baryonic Tully-Fisher distances (H75)
+filename=>BTFR_CF4_Dist_Hdist_bar
+column=>pgc|int(7)||PGC number
+column=>flag|int(4)||1:good cases, 0:outlier)
+column=>DM_av|numeric(5,2)|mag|Average of DM_riz and DM_W1 (where both available)          
+column=>DM_riz|numeric(5,2)|mag|Distance Modulus from the SDSS optical baryonic TF    
+column=>eDM_riz|numeric(5,2)|mag|Uncertainty in distance modulus from the SDSS optical baryonic TF
+column=>DM_W1|numeric(5,2)|mag|Distance Modulus from the WISE infrared baryonic TF relation at W1-band
+column=>eDM_W1|numeric(5,2)|mag|Uncertainty in  distance modulus from the WISE infrared baryonic TF relation at W1-band
+column=>1PGC|int(7)||PGC ID of dominant galaxy in group
+column=>Nest|int(6)||2MASS group ID (Tully 2015)
+column=>logMs_riz|numeric(6,3)|[Msun]|Log stellar mass, from the average rel'n between stellar mass and SDSS optical luminosity at r, i and z       
+column=>logMs_W1|numeric(6,3)|[Msun]|Log stellar mass, from the average rel'n between stellar mass and WISE infrared luminosity at W1
+column=>logM_gas|numeric(6,3)|[Msun]|Log gas mass, including the contribution of atomic Hydrogen and 33% Hellium
+column=>logMb|numeric(6,3)|[Msun]|Log total baryon mass, including the sellar and gas mass
+column=>Vhel|int(5)|km/s|Heliocentric velocity
+column=>Vls|int(5)|km/s|Velocity in Local Sheet reference frame (Tully et al. 2008)        
+column=>v3k                |int(5)          |km/s            |Radial velocity (cz) with respect to the CMB radiation
+column=>Vmod|int(5)|km/s|Velocity in CMB frame; cosmological adjustment described in CF2 data paper
+column=>f|numeric(7,3)||Cosmology correction term: f = Vmod / v3k
+column=>lgWmxi|numeric(7,3)|[km/s]|Log linewidth approximating twice inclination corrected maximum rotation
+column=>elgWi|numeric(7,3)|[km/s]|Uncertainty in log linewidth     
+column=>F21|numeric(6,2)|Jy.km/s|HI line flux
+column=>e_F21|numeric(6,2)|Jy.km/s|Uncertainty of HI line flux
+column=>inc|int(3)|deg|Inclination from face on
+column=>einc|int(3)|deg|Uncertainty in inclination from face on
+column=>g***|numeric(5,2)|mag|Chosen SDSS g-band fully corrected, including host absorption
+column=>r***|numeric(5,2)|mag|Chosen SDSS r-band fully corrected, including host absorption
+column=>i***|numeric(5,2)|mag|Chosen SDSS i-band fully corrected, including host absorption
+column=>z***|numeric(5,2)|mag|Chosen SDSS z-band fully corrected, including host absorption
+column=>w1***|numeric(5,2)|mag|Chosen WISE w1-band fully corrected, including host absorption
+column=>Qs|int(4)||SDSS: QA quality (worst = 0 < Q < 5 = best)
+column=>Qw|int(4)||WISE: QA quality (worst = 0 < Q < 5 = best)
+column=>RA|numeric(8,4)|hour|Right ascension J2000 in decimal hours
+column=>DE|numeric(8,4)|deg|Declination J2000
+column=>GLong|numeric(8,4)|deg|Galactic longitude
+column=>GLat|numeric(8,4)|deg|Galactic latitude
+column=>SGL|numeric(8,4)|deg|Supergalactic longitude
+column=>SGB|numeric(8,4)|deg|Supergalactic latitude
+column=>Nkt|int(3)||Number of galaxies in KT17 group (Kourkchi & Tully, 2017, ApJ, 843, 16)
+column=>N15|int(3)||Number of galaxies in T15 group (Tully, R.B. 2015, AJ, 149, 171)
+column=>SGLg|numeric(8,4)|deg|Supergalactic longitude of group, average weighted by luminosity
+column=>SGBg|numeric(8,4)|deg|Supergalactic latitude of group, average weighted by luminosity
 column=>Vmodg|int(5)|km/s|average group velocity in CMB frame; cosmological adjustment described in CF2 data paper
 end
 begin
@@ -6028,6 +6176,8 @@ column=>Vhel|int(5)|km/s|Heliocentric velocity
 column=>Ag|numeric(4,2)|mag|Galactic extinction in B band (Schlegel et al.)
 column=>Inc|int(2)|deg|Inclination from RC3
 end
+
+
 begin
 category=>Supplementary Catalogs
 catalog=>WISE Calibrators
@@ -6189,7 +6339,7 @@ description=>TF candidates in nest 100001, Abell 1656 = Coma Cluster
 filename=>100001_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 100001
-column=>PGC1|int(7)||PGC 44715 = NGC 4889; brightest nest member
+column=>1PGC|int(7)||PGC 44715 = NGC 4889; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6207,7 +6357,7 @@ description=>TF candidates in nest 100002, Virgo Cluster
 filename=>100002_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 100002
-column=>PGC1|int(7)||PGC 41220 = NGC 4472 = M49; brightest nest member
+column=>1PGC|int(7)||PGC 41220 = NGC 4472 = M49; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6225,7 +6375,7 @@ description=>TF candidates in nest 100005, Abell 1367
 filename=>100005_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 100005
-column=>PGC1|int(7)||PGC 36487 = NGC3842; brightest nest member
+column=>1PGC|int(7)||PGC 36487 = NGC3842; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6243,7 +6393,7 @@ description=>TF candidates in nest 100007 = Abell 2151 = Hercules Cluster
 filename=>100007_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 100007
-column=>PGC1|int(7)||PGC 56962 = NGC 6041; brightest nest member
+column=>1PGC|int(7)||PGC 56962 = NGC 6041; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6261,7 +6411,7 @@ description=>TF candidates in nest 100008 = 7 groups in Ursa Major
 filename=>100008_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 100008
-column=>PGC1|int(7)||PGC number of brightest member of individual group
+column=>1PGC|int(7)||PGC number of brightest member of individual group
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6279,7 +6429,7 @@ description=>TF candidates in nest 100018 = NGC 4065 Cluster
 filename=>100018_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 100018
-column=>PGC1|int(7)||PGC 38156 = NGC 4065; brightest nest member
+column=>1PGC|int(7)||PGC 38156 = NGC 4065; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6297,7 +6447,7 @@ description=>TF candidates in nest 100030 = Cancer Cluster
 filename=>100030_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 100030
-column=>PGC1|int(7)||PGC 23404 = NGC 2563; brightest nest member
+column=>1PGC|int(7)||PGC 23404 = NGC 2563; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6315,7 +6465,7 @@ description=>TF candidates in nest 120002 = Virgo W Cluster
 filename=>120002_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 120002
-column=>PGC1|int(7)||PGC 40001 = NGC 4303 = M61; brightest nest member
+column=>1PGC|int(7)||PGC 40001 = NGC 4303 = M61; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6333,7 +6483,7 @@ description=>TF candidates in nest 200003 = Abell 262
 filename=>200003_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 200003
-column=>PGC1|int(7)||PGC 6962 = NGC 708; brightest nest member
+column=>1PGC|int(7)||PGC 6962 = NGC 708; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6351,7 +6501,7 @@ description=>TF candidates in nest 200005 = NGC 410 Cluster
 filename=>200005_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 200005
-column=>PGC1|int(7)||PGC 4224 = NGC 410; brightest nest member
+column=>1PGC|int(7)||PGC 4224 = NGC 410; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6369,7 +6519,7 @@ description=>TF candidates in nest 200006 = NGC 507 Cluster
 filename=>200006_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 200006
-column=>PGC1|int(7)||PGC 5098 = NGC 507; brightest nest member
+column=>1PGC|int(7)||PGC 5098 = NGC 507; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6387,7 +6537,7 @@ description=>TF candidates in nest 200012 = Abell 400
 filename=>200012_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 200012
-column=>PGC1|int(7)||PGC 11188 = NGC 1128; brightest nest member
+column=>1PGC|int(7)||PGC 11188 = NGC 1128; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6405,7 +6555,7 @@ description=>TF candidates in nest 200016 = Abell 2634/66
 filename=>200016_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 200016
-column=>PGC1|int(7)||PGC 71985 = NGC 7720; brightest nest member
+column=>1PGC|int(7)||PGC 71985 = NGC 7720; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6423,7 +6573,7 @@ description=>TF candidates in nest 200017 = Abell 539
 filename=>200017_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 200017
-column=>PGC1|int(7)||PGC 75312 = UGC 3274; brightest nest member
+column=>1PGC|int(7)||PGC 75312 = UGC 3274; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6441,7 +6591,7 @@ description=>TF candidates in nest 200037 = NGC 70 Cluster
 filename=>200037_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 200037
-column=>PGC1|int(7)||PGC 1194 = NGC 70; brightest nest member
+column=>1PGC|int(7)||PGC 1194 = NGC 70; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6459,7 +6609,7 @@ description=>TF candidates in nest 200045 = NGC 80 Cluster
 filename=>200045_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 200045
-column=>PGC1|int(7)||PGC 1351 = NGC 80; brightest nest member
+column=>1PGC|int(7)||PGC 1351 = NGC 80; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6477,7 +6627,7 @@ description=>TF candidates in nest 200092 = Pegasus Cluster
 filename=>200092_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 200092
-column=>PGC1|int(7)||PGC 71121 = NGC 7619; brightest nest member
+column=>1PGC|int(7)||PGC 71121 = NGC 7619; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6495,7 +6645,7 @@ description=>TF candidates in nest 100003 = Centaurus Cluster = Abell 3526
 filename=>100003_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 100003
-column=>PGC1|int(7)||PGC 43296 = NGC 4696; brightest nest member
+column=>1PGC|int(7)||PGC 43296 = NGC 4696; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6513,7 +6663,7 @@ description=>TF candidates in nest 100006 = Hydra Cluster = Abell 1060
 filename=>100006_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 100006
-column=>PGC1|int(7)||PGC 31478 = NGC 3311; brightest nest member
+column=>1PGC|int(7)||PGC 31478 = NGC 3311; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6531,7 +6681,7 @@ description=>TF candidates in nest 100014 = Antlia Cluster = S636
 filename=>100014_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 100014
-column=>PGC1|int(7)||PGC 30308 = NGC 3223; brightest nest member
+column=>1PGC|int(7)||PGC 30308 = NGC 3223; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude
@@ -6549,7 +6699,7 @@ description=>TF candidates in nest 200015 = Fornax Cluster
 filename=>200015_basics_bar
 column=>PGC|int(7)||PGC number
 column=>Nest|int(6)||Nest ID; 200015
-column=>PGC1|int(7)||PGC 13418 = NGC 1399; brightest nest member
+column=>1PGC|int(7)||PGC 13418 = NGC 1399; brightest nest member
 column=>Ty|numeric(5,1)||Numeric type code from LEDA
 column=>R25|numeric(4,2)||Log major to minor axial rato from LEDA
 column=>glon|numeric(8,4)|deg|Galactic Longitude

@@ -17,7 +17,7 @@ try:
     db=mdb.connect(EDD_config.host,user=EDD_config.user,passwd=EDD_config.passwd,db=EDD_config.database)
     # accept empty values in integer columns
 except:
-    print "There was an error connecting to the database"
+    print("There was an error connecting to the database")
     exit(1)
 
     
@@ -33,10 +33,11 @@ edd.create_tables(db)
 try:
     f=open("catalogs_info.dat","r")
 except:
-    print "Error in opening catalogs_info.dat file."
+    print("Error in opening catalogs_info.dat file.")
     exit
     
 # initialize an empty table to hold the ktables info
+NO_catal = 0 
 mydata_tables = []
 mydata_columns=[]
 coordinates_columns_info={}
@@ -80,11 +81,12 @@ for myline in f:
       special_code.append(code)
 
     if myline_args[0]=="end":
-         #print "Finished scanning catalog: "+mycatalog["dbtable"]
+         print("Finished scanning catalog: "+mycatalog["dbtable"])
          try:
-           mydata_tables.append((mycatalog["dbtable"],mycatalog["category"],mycatalog["bibcode"],mycatalog["catalog"],mycatalog["abbreviation"],mycatalog["description"],mycatalog["filename"]))
+           mydata_tables.append((NO_catal,mycatalog["dbtable"],mycatalog["category"],mycatalog["bibcode"],mycatalog["catalog"],mycatalog["abbreviation"],mycatalog["description"],mycatalog["filename"]))
+           NO_catal+=1
          except:
-           print "Table "+mycatalog["dbtable"]+" seems to be missing some description information"
+           print("Table "+mycatalog["dbtable"]+" seems to be missing some description information")
            exit()
          mysql_statement="CREATE TABLE "+mycatalog["dbtable"]+"("
          for col_def in create_columns:
@@ -99,7 +101,7 @@ for myline in f:
             mysql_statement=mysql_statement+"`"+col_def[0]+"` "+col_def[1].lower()+","
          if coordinates_columns:
               # we have coordinates! adding two more columns
-              print "adding al and de columns to table "+mycatalog["dbtable"]
+              print("adding al and de columns to table "+mycatalog["dbtable"])
               mysql_statement=mysql_statement+"`al2000` numeric(20,15),"
               mysql_statement=mysql_statement+"`de2000` numeric(20,15),"
               coordinates_columns_info[mycatalog["dbtable"]]=coordinates_columns
@@ -113,25 +115,26 @@ for myline in f:
              db.commit()
              cur.close()
          except:
-             print "Error in creating a table. The SQL statement that created an error was:"
-             print "---------"
-             print mysql_statement
-             print "---------"
-             print "Suggestion: copy and paste this statement into a mysql window and see what the problem is"
+             print("Error in creating a table. The SQL statement that created an error was:")
+             print("---------")
+             print(mysql_statement)
+             print("---------")
+             print("Suggestion: copy and paste this statement into a mysql window and see what the problem is")
              exit()
    except:
-     print "There is something wrong with this line in catalogs_info.dat:"
-     print myline
+     print("There is something wrong with this line in catalogs_info.dat:")
+     print(myline)
      exit()
 
 # insert data into mysql tables
-print "Inserting data into ktables..."
+print("Inserting data into ktables...")
 cur=db.cursor()
 cur.executemany(
-    """INSERT INTO ktables (dbtable,category,bibcode,catalog,abbreviation,description,file)
-    VALUES (%s,%s,%s,%s,%s,%s,%s)""",mydata_tables)
+    """INSERT INTO ktables (ID_catal,dbtable,category,bibcode,catalog,abbreviation,description,file)
+    VALUES (%s,%s,%s,%s,%s,%s,%s,%s)""",mydata_tables)
 db.commit()
-print "Inserting data into kcolumns..."
+
+print("Inserting data into kcolumns...")
 cur.executemany(
     """INSERT INTO kcolumns(dbtable,tabcolumn,units,description,ucd,justification,format)
     VALUES (%s,%s,%s,%s,%s,%s,%s)""",mydata_columns)
@@ -142,12 +145,13 @@ cur.close()
 
 pgc=set();
 cur=db.cursor()
-cur.execute('SELECT * from ktables')
+cur.execute('SELECT ID_catal,dbtable,category,bibcode,catalog,abbreviation,description,file from ktables ORDER BY ID_catal ASC')
 tables=cur.fetchall()
 cur.close()
 for table in tables:
-  dbtable=table[0]
-  print "Inserting data into table "+dbtable
+  dbtable=table[1]
+  print('Table Metadata: ', table)
+  print("Inserting data into table "+dbtable)
   file=table[7]
 
   # retrieve the list of columns
@@ -157,14 +161,14 @@ for table in tables:
   cur.close()
 
   # open the corresponding bar file
-  print "reading file ... "+file
+  print("reading file ... "+file)
   data=[]
   f=open(bar_files_dir+"/"+file,"r")
   data=f.readlines()
-  print "done"
+  print("done")
   # special handling of coordinates
-  if dbtable in coordinates_columns_info.keys():
-    print "Converting coordinates into el de format for table "+dbtable
+  if dbtable in list(coordinates_columns_info.keys()):
+    print("Converting coordinates into el de format for table "+dbtable)
     if dbtable in ['kbothun','kdellan','kpscz','krfgcvel']:
       remove=False
     else:
@@ -173,9 +177,11 @@ for table in tables:
   # actual reading of the file
   data_from_file = []
   for line in data:
-    line=line.replace("NaN","").replace("\n","").split("|")
+    line=line.replace("NaN","").replace("\n","").replace("inf","").replace("nan","").split("|")
     line=[x.rstrip().lstrip() for x in line]
-    line=[x if x else None for x in line]
+    line=[str(x).encode('cp1252', errors='ignore') if x else '' for x in line]
+    if len(line)<=1 or line[0]=='':
+        continue
     if ("kleda" not in table):
         pgc.add(int(line[0]))
     data_from_file.append((line))
@@ -183,51 +189,63 @@ for table in tables:
   # prepare the columns format string
   num_columns = len(columns)
   num_elements = len(data_from_file[0])
-  print "Number of columns: "+str(num_columns)+" Number of elements: "+str(num_elements)
+  print("Number of columns: "+str(num_columns)+" Number of elements: "+str(num_elements))
   if (num_columns!=num_elements):
-    print "Warning: the number of columns does not match the number of elements"
+    print("Warning: the number of columns does not match the number of elements")
     db.close()
-    zipped = map (lambda x,y: [x,y], columns, data_from_file[0])
+    zipped = list(map (lambda x,y: [x,y], columns, data_from_file[0]))
     for tup in zipped:
-      print tup
+      print(tup)
     exit()
   format = "%s,"*num_elements
   format = format[:-1]
   # insert data into database
-  print "inserting data into database..."
-  print "Checking health of lines to be inserted"
+  print("inserting data into database...")
+  print("Checking health of lines to be inserted")
   for line in data_from_file:
       if len(line) != num_columns:
           print("A Line has a problem:\n")
           print(line)
           exit()
   cur=db.cursor()
-  cur.executemany("INSERT INTO "+dbtable+" VALUES ("+format+")",data_from_file)
+  cur.executemany("INSERT IGNORE INTO "+dbtable+" VALUES ("+format+")", data_from_file)
   db.commit()
-  print "--------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+  #try:
+  #    cur=db.cursor()
+  #    cur.executemany("INSERT INTO "+dbtable+" VALUES ("+format+")",data_from_file)
+  #    db.commit()
+  #except mdb._exceptions.OperationalError as e:
+  #    print(e)
+  #    #print(data_from_file)
+  #    with open('myfile.txt', 'w') as f:
+  #        for item in data_from_file:
+  #            f.write('%s\n' % item)
+  #    sys.exit(1)
+              
+  print("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
   cur.close()
 
-print "generating PGC table from all tables except leda"
+print("generating PGC table from all tables except leda")
 cur=db.cursor()
 pgc=sorted(pgc)
 cur.executemany("INSERT INTO pgc VALUES (%s)",pgc)
 db.commit()
 cur.close()
-print "comparing with pgc from leda"
+print("comparing with pgc from leda")
 cur=db.cursor()
 cur.execute("select pgc from kleda_orig;")
 pgc_leda=cur.fetchall()
 pgc_leda=[x[0] for x in pgc_leda]
 cur.close()
-print "Current number of object in the database: "+str(len(pgc))
-print "Number of objects in Leda:                "+str(len(pgc_leda))
-print pgc[0]
-print pgc_leda[0]
+print("Current number of object in the database: "+str(len(pgc)))
+print("Number of objects in Leda:                "+str(len(pgc_leda)))
+print(pgc[0])
+print(pgc_leda[0])
 
 diff=list(set(pgc)-set(pgc_leda))
 #print diff
 if (len(diff)>0):
-    print "Leda table is incomplete. "+str(len(diff))+" objects are missing"
+    print("Leda table is incomplete. "+str(len(diff))+" objects are missing")
     answer=edd.query_yes_no("Do you want to retrieve the missing LEDA objects from Lyon?",default="yes")
     if (answer=="yes"):
         edd.generate_kleda_orig_from_lyon(db,diff)
@@ -235,19 +253,19 @@ if (len(diff)>0):
 # now generate the actual kleda table from the original
 edd.copy_leda_orig_into_leda(db)
 
-print "Applying special mysql code..."
+print("Applying special mysql code...")
 cur=db.cursor()
 try:
   for code in special_code:
-    print "running code: "+code
+    print("running code: "+code)
     cur.execute(code)
     db.commit()
 except:
-  print "Unable to execute special code "+code
+  print("Unable to execute special code "+code)
   cur.close()
 
-print "All done"
-print "Don't forget to run the sql code to transfer the EDDsDB data into the public database"
+print("All done")
+print("Don't forget to run the sql code to transfer the EDDsDB data into the public database")
 
 
 db.close()
