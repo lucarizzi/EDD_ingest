@@ -17,10 +17,14 @@ CREATE VIEW ktables AS SELECT * FROM EDDsDB.ktables WHERE dbtable NOT IN
 ,'kalltfr' 
 ,'kspittfr3'
 ,'kcf3sntest'
-,'kcomments'
+,'kcf3tab3'
+,'kcommentdrop'
+,'kcommentkeep'
+,'kcommentfaint'
 ,'kdummy'
 ,'kefardm' 
 ,'keneardm'
+,'kirsbf'
 ,'kmisc' 
 ,'kpnlf' 
 ,'ktrgb' 
@@ -37,7 +41,83 @@ CREATE VIEW ktables AS SELECT * FROM EDDsDB.ktables WHERE dbtable NOT IN
 ,'kflatgbt'
 ,'kehsanN'
 ,'kehsanS'
-,'kcf4cand');
+,'kscolnic3tab'
+,'kscolnic17'
+,'kscolnic18'
+,'kpantheon'
+,'kpantheonplus'
+,'kpantheonplus2'
+,'kdo'
+,'k100001'
+,'k100002'
+,'k100003'
+,'k100005'
+,'k100006'
+,'k100007'
+,'k100008'
+,'k100014'
+,'k100018'
+,'k100030'
+,'k120002'
+,'k200003'
+,'k200005'
+,'k200006'
+,'k200012'
+,'k200015'
+,'k200016'
+,'k200017'
+,'k200037'
+,'k200045'
+,'k200092'
+,'kcf4calib'
+,'kcf4sbf'
+,'kcf4snia'
+,'kzpcal'
+,'k2massv'
+,'kedist'
+,'kqdist'
+,'kaaronson'
+,'kbern'
+,'kbothun'
+,'kbureau'
+,'kcourteau'
+,'kcourmath'
+,'kmath'
+,'kdellan'
+,'kher'
+,'kdale'
+,'kgiov'
+,'khaynes'
+,'khancl'
+,'khanpp'
+,'klu'
+,'kmcdonald'
+,'kmould'
+,'kpiercef'
+,'kroth'
+,'kschommer'
+,'kverh'
+,'kwillcl'
+,'kwillpp'
+,'klucat'
+,'kcng'
+,'k2mrsaug'
+,'kv3k'
+,'klelli'
+,'kpono'
+,'ktfcal'
+,'krfgc2mass'
+,'kallceph4'
+,'kalltrgb4'
+,'kcf4tfcal'
+,'kcf4tfdist'
+,'kflatgaltf'
+,'k6dfgsrev'
+,'kcf4tfrs'
+,'ksdssfp'
+,'ksdssfpdist'
+,'ksdssfpdistv2'
+,'krfgcvel');
 
 # Create kcolumns
 CREATE VIEW kcolumns AS SELECT * FROM EDDsDB.kcolumns WHERE tabcolumn != 'P' ;
@@ -57,7 +137,9 @@ CREATE VIEW kbothun AS SELECT * FROM EDDsDB.kbothun ;
 CREATE VIEW kcfs AS SELECT * FROM EDDsDB.kcfs ;
 CREATE VIEW kcf2 AS SELECT * FROM EDDsDB.kcf2 ;
 CREATE VIEW kcf3 AS SELECT * FROM EDDsDB.kcf3 ;
+CREATE VIEW kcf4cand AS SELECT * FROM EDDsDB.kcf4cand ;
 CREATE VIEW kallsn3 AS SELECT * FROM EDDsDB.kallsn3 ;
+CREATE VIEW kallmaser AS SELECT * FROM EDDsDB.kallmaser ;
 CREATE VIEW Prfgcvel AS SELECT * FROM EDDsDB.Prfgcvel ;
 CREATE VIEW k2m1175 AS SELECT * FROM EDDsDB.k2m1175 ;
 CREATE VIEW k2massv AS SELECT * FROM EDDsDB.k2massv ;
@@ -71,6 +153,7 @@ CREATE VIEW karauc AS SELECT * FROM EDDsDB.karauc ;
 CREATE VIEW kbern AS SELECT * FROM EDDsDB.kbern ;
 CREATE VIEW kblake AS SELECT * FROM EDDsDB.kblake ;
 CREATE VIEW kbureau AS SELECT * FROM EDDsDB.kbureau ;
+CREATE VIEW kcantsbf AS SELECT * FROM EDDsDB.kcantsbf ;
 CREATE VIEW kchp AS SELECT * FROM EDDsDB.kchp ;
 CREATE VIEW kcng AS SELECT * FROM EDDsDB.kcng ;
 CREATE VIEW kcornell AS SELECT * FROM EDDsDB.kcornell ;
@@ -97,7 +180,9 @@ CREATE VIEW khycensbf AS SELECT * FROM EDDsDB.khycensbf ;
 CREATE VIEW kjsn1a AS SELECT * FROM EDDsDB.kjsn1a ;
 CREATE VIEW kleda AS SELECT * FROM EDDsDB.kleda ;
 CREATE VIEW klga AS SELECT * FROM EDDsDB.klga ;
+CREATE VIEW klilow AS SELECT * FROM EDDsDB.klilow ;
 CREATE VIEW klu AS SELECT * FROM EDDsDB.klu ;
+CREATE VIEW kloss AS SELECT * FROM EDDsDB.kloss ;
 CREATE VIEW kmakvp AS SELECT * FROM EDDsDB.kmakvp ;
 CREATE VIEW kmath AS SELECT * FROM EDDsDB.kmath ;
 CREATE VIEW kmcc AS SELECT * FROM EDDsDB.kmcc ;
@@ -130,6 +215,7 @@ CREATE VIEW ksmac AS SELECT * FROM EDDsDB.ksmac ;
 CREATE VIEW ksmac3 AS SELECT * FROM EDDsDB.ksmac3 ;
 CREATE VIEW kspringob AS SELECT * FROM EDDsDB.kspringob ;
 CREATE VIEW kt07d AS SELECT * FROM EDDsDB.kt07d ;
+CREATE VIEW ktempel AS SELECT * FROM EDDsDB.ktempel ;
 CREATE VIEW ktfcal AS SELECT * FROM EDDsDB.ktfcal ;
 CREATE VIEW ktsbf AS SELECT * FROM EDDsDB.ktsbf ;
 CREATE VIEW ktsn1a AS SELECT * FROM EDDsDB.ktsn1a ;
@@ -149,3 +235,7 @@ CREATE VIEW ks4gone AS SELECT * FROM EDDsDB.ks4gone ;
 CREATE VIEW kasassn AS SELECT * FROM EDDsDB.kasassn ;
 CREATE VIEW klimgroups AS SELECT * FROM EDDsDB.klimgroups ;
 CREATE VIEW klvgdb AS SELECT * FROM EDDsDB.klvgdb ;
+CREATE VIEW kalf100 AS SELECT * FROM EDDsDB.kalf100 ;
+CREATE VIEW k2mtf AS SELECT * FROM EDDsDB.k2mtf ;
+CREATE VIEW kcsp1 AS SELECT * FROM EDDsDB.kcsp1 ;
+CREATE VIEW kcf4tfdistpaper AS SELECT * FROM EDDsDB.kcf4tfdistpaper ;

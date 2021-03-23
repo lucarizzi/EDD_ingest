@@ -679,7 +679,7 @@ column=>Vmod|int(5)|km/s|Velocity in CMB frame; cosmological adjustment describe
 column=>DM_av|numeric(5,2)|mag|Weighted average distance moduli (w=1/sigma^2)
 column=>eDM|numeric(5,2)|mag|Minimum error of all measured moduli
 column=>av_flag|int(4)||0:if at least one distance is not flagged as outlier, 1:if all cataloged distances are rejected
-column=>DM_cf4|numeric(5,2)|mag|best distance moduli in "All CF4 TF-distances" 
+column=>DM_cf4|numeric(5,2)|mag|best distance moduli in "All CF4 BTF-distances" 
 column=>eDM_cf4|numeric(5,2)|mag|rms dispersion of the "all cf4" distance measures
 column=>cf4_flag|int(4)||0:accepted, 1:outlier)
 column=>DM_spitzer|numeric(5,2)|mag|distance moduli in "Spitzer CF3 TFR" on the "cf4" scales
@@ -693,10 +693,42 @@ column=>eDM_sfi|numeric(5,2)|mag|rms dispersion of the "sfi" distance measure
 column=>sfi_flag|int(4)||0:accepted, 1:outlier)
 column=>DM_2mtf|numeric(5,2)|mag|distance moduli in "2MTF" on the "cf4" scales
 column=>eDM_2mtf|numeric(5,2)|mag|rms dispersion of the "2mtf" distance measures
-column=>flat_2mtf|int(4)||0:accepted, 1:outlier)
+column=>2mtf_flag|int(4)||0:accepted, 1:outlier)
 column=>DM_flat|numeric(5,2)|mag|distance moduli in "Flat Galaxies TFR" on the "cf4" scales
 column=>eDM_flat|numeric(5,2)|mag|rms dispersion of the "flat" distance measures
 column=>flat_flag|int(4)||0:accepted, 1:outlier)
+end
+begin
+category=>Summary Distances
+catalog=>All CF4 FP Samples
+abbreviation=>cf4tfrs
+dbtable=>kcf4fps
+bibcode=>
+description=>All CF4 adjusted FP distances
+filename=>FP_CF4_components_bar
+column=>pgc|int(7)||PGC number
+column=>1PGC|int(7)||PGC identification of brightest member of group
+column=>Nest|int(6)||2MASS "nest" group ID
+column=>Vcmb|int(5)|km/s|Radial velocity (cz) with respect to the CMB radiation 
+column=>Vmod|int(5)|km/s|Velocity in CMB frame; cosmological adjustment described in CF2 data paper
+column=>DM_av|numeric(5,2)|mag|Weighted average distance moduli (w=1/sigma^2)
+column=>eDM|numeric(5,2)|mag|Minimum error of all measured moduli
+column=>av_flag|int(4)||0:if at least one distance is not flagged as outlier, 1:if all cataloged distances are rejected
+column=>DM_fpsdss|numeric(5,2)|mag|distance moduli in "FP: SDSS Distances.v3" 
+column=>eDM_fpsdss|numeric(5,2)|mag|rms dispersion of the "SDSS" distance measures
+column=>fpsdss_flag|int(4)||0:accepted, 1:outlier)
+column=>DM_6dfgs|numeric(5,2)|mag|best distance moduli in "6dFGS Revised" on the "FP: SDSS" scales
+column=>eDM_6dfgs|numeric(5,2)|mag|rms dispersion of the "6dFGS Revised" distance measures
+column=>6dfgs_flag|int(4)||0:accepted, 1:outlier)
+column=>DM_smac|numeric(5,2)|mag|cf2 distance moduli in "SMAC" on the "FP: SDSS" scales
+column=>eDM_smac|numeric(5,2)|mag|rms dispersion of the "SMAC" distance measures
+column=>smac_flag|int(4)||0:accepted, 1:outlier)
+column=>DM_enear|numeric(5,2)|mag|sfi distance moduli in "ENEAR" on the "FP: SDSS" scales
+column=>eDM_enear|numeric(5,2)|mag|rms dispersion of the "ENEAR" distance measure
+column=>enear_flag|int(4)||0:accepted, 1:outlier)
+column=>DM_efar|numeric(5,2)|mag|distance moduli in "EFAR" on the "FP: SDSS" scales
+column=>eDM_efar|numeric(5,2)|mag|rms dispersion of the "EFAR" distance measures
+column=>efar_flag|int(4)||0:accepted, 1:outlier)
 end
 begin
 category=>Summary Distances
@@ -2580,6 +2612,36 @@ column=>SGL|numeric(8,4)|deg|Supergalactic Longitude
 column=>SGB|numeric(8,4)|deg|Supergalactic Latitude
 column=>EBV|numeric(8,4)|mag|E(B-V)
 column=>Ty|varchar(4)||Type code given in RC3
+column=>lgMass|numeric(7,4)||Log mass of host (solar units) in pantheonplus table
+column=>N|int(1)||Number of contributions to distance modulus measurement
+end
+begin
+category=>SNIa
+catalog=>Scolnic Pantheonplus20.v2
+abbreviation=>pantheonplus2
+dbtable=>kpantheonplus2
+bibcode=>
+description=>Private SNIa compilation provided by Dillon Brout & Dan Scolnic.v2
+filename=>PANTHEONPLUS_v2_11.bar
+column=>pgc|int(7)||PGC number of host galaxy
+column=>SNIa|varchar(11)||Supernova identification
+column=>DM|numeric(7,4)|mag|Distance modulus averaged over all contributions
+column=>eDM|numeric(6,4)|mag|Error in Pantheonplus distance modulus
+column=>Vrc3|int(5)|km/s|Heliocentric velocity of supernova host from RC3
+column=>Vhel|int(5)|km/s|Heliocentric velocity in Pantheonplus table
+column=>Vcmb|int(5)|km/s|Velocity of supernova in CMB frame
+column=>eV|int(4)|km/s|Error on velocity in pantheonplus table
+column=>Vpec|int(4)|km/s|Peculiar velocity in pantheonplus table
+column=>eVp|int(3)|km/s|Error on peculiar velocity in pantheonplus table
+column=>RA|numeric(10,6)|deg|Right ascension (J2000) in degrees
+column=>De|numeric(10,6)|deg|Declination (J2000) in degrees
+column=>J2000|varchar(16)|hms,dds|J2000 right ascension and declination 
+column=>Glon|numeric(8,4)|deg|Galactic Longitude
+column=>Glat|numeric(8,4)|deg|Galactic Latitude
+column=>SGL|numeric(8,4)|deg|Supergalactic Longitude
+column=>SGB|numeric(8,4)|deg|Supergalactic Latitude
+column=>Ty|varchar(4)||Type code given in RC3
+column=>EBV|numeric(6,4)|mag|E(B-V)
 column=>lgMass|numeric(7,4)||Log mass of host (solar units) in pantheonplus table
 column=>N|int(1)||Number of contributions to distance modulus measurement
 end
@@ -5997,6 +6059,7 @@ description=>CF4 Baryonic Tully-Fisher distances
 filename=>BTFR_CF4_Dist_bar
 column=>pgc|int(7)||PGC number
 column=>flag|int(4)||1:good cases, 0:outlier)
+column=>DM_75|numeric(5,2)|mag|Hubble Distance modulus from D75=Vr/75, where Vr = fg * V3kg
 column=>DM_av|numeric(5,2)|mag|Average of DM_riz and DM_W1 (where both available)
 column=>DM_riz|numeric(5,2)|mag|Distance Modulus from the SDSS optical baryonic TF 
 column=>eDM_riz|numeric(5,2)|mag|Uncertainty in distance modulus from the SDSS optical baryonic TF
@@ -6039,57 +6102,6 @@ column=>Vhg|int(5)|km/s|average group velocity in heliocentric frame
 column=>Vlsg|int(5)|km/s|average group velocity in Local Sheet frame
 column=>V3kg|int(5)|km/s|average group velocity in CMB frame
 column=>fg|numeric(7,3)||Cosmology correction term: f=1.+0.5*(1.-q0)*z-(1./6)*(1.-q0-3.*q0**2+1.)*z**2 where q0=0.5*(0.27-2.*0.73)
-end
-begin
-category=>Supplementary Catalogs
-catalog=>All CF4 BTF-distances (H75-->Mass_hi)
-abbreviation=>cf4btfdistances_H75
-dbtable=>cf4btfdistances_H75
-bibcode=>
-description=>CF4 Baryonic Tully-Fisher distances (H75)
-filename=>BTFR_CF4_Dist_Hdist_bar
-column=>pgc|int(7)||PGC number
-column=>flag|int(4)||1:good cases, 0:outlier)
-column=>DM_av|numeric(5,2)|mag|Average of DM_riz and DM_W1 (where both available)          
-column=>DM_riz|numeric(5,2)|mag|Distance Modulus from the SDSS optical baryonic TF    
-column=>eDM_riz|numeric(5,2)|mag|Uncertainty in distance modulus from the SDSS optical baryonic TF
-column=>DM_W1|numeric(5,2)|mag|Distance Modulus from the WISE infrared baryonic TF relation at W1-band
-column=>eDM_W1|numeric(5,2)|mag|Uncertainty in  distance modulus from the WISE infrared baryonic TF relation at W1-band
-column=>1PGC|int(7)||PGC ID of dominant galaxy in group
-column=>Nest|int(6)||2MASS group ID (Tully 2015)
-column=>logMs_riz|numeric(6,3)|[Msun]|Log stellar mass, from the average rel'n between stellar mass and SDSS optical luminosity at r, i and z       
-column=>logMs_W1|numeric(6,3)|[Msun]|Log stellar mass, from the average rel'n between stellar mass and WISE infrared luminosity at W1
-column=>logM_gas|numeric(6,3)|[Msun]|Log gas mass, including the contribution of atomic Hydrogen and 33% Hellium
-column=>logMb|numeric(6,3)|[Msun]|Log total baryon mass, including the sellar and gas mass
-column=>Vhel|int(5)|km/s|Heliocentric velocity
-column=>Vls|int(5)|km/s|Velocity in Local Sheet reference frame (Tully et al. 2008)        
-column=>v3k                |int(5)          |km/s            |Radial velocity (cz) with respect to the CMB radiation
-column=>Vmod|int(5)|km/s|Velocity in CMB frame; cosmological adjustment described in CF2 data paper
-column=>f|numeric(7,3)||Cosmology correction term: f = Vmod / v3k
-column=>lgWmxi|numeric(7,3)|[km/s]|Log linewidth approximating twice inclination corrected maximum rotation
-column=>elgWi|numeric(7,3)|[km/s]|Uncertainty in log linewidth     
-column=>F21|numeric(6,2)|Jy.km/s|HI line flux
-column=>e_F21|numeric(6,2)|Jy.km/s|Uncertainty of HI line flux
-column=>inc|int(3)|deg|Inclination from face on
-column=>einc|int(3)|deg|Uncertainty in inclination from face on
-column=>g***|numeric(5,2)|mag|Chosen SDSS g-band fully corrected, including host absorption
-column=>r***|numeric(5,2)|mag|Chosen SDSS r-band fully corrected, including host absorption
-column=>i***|numeric(5,2)|mag|Chosen SDSS i-band fully corrected, including host absorption
-column=>z***|numeric(5,2)|mag|Chosen SDSS z-band fully corrected, including host absorption
-column=>w1***|numeric(5,2)|mag|Chosen WISE w1-band fully corrected, including host absorption
-column=>Qs|int(4)||SDSS: QA quality (worst = 0 < Q < 5 = best)
-column=>Qw|int(4)||WISE: QA quality (worst = 0 < Q < 5 = best)
-column=>RA|numeric(8,4)|hour|Right ascension J2000 in decimal hours
-column=>DE|numeric(8,4)|deg|Declination J2000
-column=>GLong|numeric(8,4)|deg|Galactic longitude
-column=>GLat|numeric(8,4)|deg|Galactic latitude
-column=>SGL|numeric(8,4)|deg|Supergalactic longitude
-column=>SGB|numeric(8,4)|deg|Supergalactic latitude
-column=>Nkt|int(3)||Number of galaxies in KT17 group (Kourkchi & Tully, 2017, ApJ, 843, 16)
-column=>N15|int(3)||Number of galaxies in T15 group (Tully, R.B. 2015, AJ, 149, 171)
-column=>SGLg|numeric(8,4)|deg|Supergalactic longitude of group, average weighted by luminosity
-column=>SGBg|numeric(8,4)|deg|Supergalactic latitude of group, average weighted by luminosity
-column=>Vmodg|int(5)|km/s|average group velocity in CMB frame; cosmological adjustment described in CF2 data paper
 end
 begin
 category=>Supplementary Catalogs

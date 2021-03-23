@@ -179,8 +179,8 @@ for table in tables:
   for line in data:
     line=line.replace("NaN","").replace("\n","").replace("inf","").replace("nan","").split("|")
     line=[x.rstrip().lstrip() for x in line]
-    line=[str(x).encode('cp1252', errors='ignore') if x else '' for x in line]
-    if len(line)<=1 or line[0]=='':
+    line=[str(x).encode('cp1252', errors='ignore') if x else None for x in line]
+    if len(line)<=1 or line[0]=='' or line[0] is None:
         continue
     if ("kleda" not in table):
         pgc.add(int(line[0]))

@@ -102,4 +102,4 @@ then switch to
 
 unsetenv PYTHONPATH
 
-/usr/bin/python create_database.sql
+/usr/bin/python create_database.py
